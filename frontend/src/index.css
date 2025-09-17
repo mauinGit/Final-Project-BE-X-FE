@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-opensans: "Open Sans", sans-serif;
+}
+
+@layer base{
+    :root{
+        --color-blue: #2196F3;
+        --color-red: #EB4A3D;
+        --color-yellow: #FBBF0E;
+        --color-green: #3CAB5A;
+        --color-heading: #3E3E3E;
+        --color-text: #636363;
+        --color-secondaryBlue: #F5F7FA;
+    }
+}
+
+@layer utilities{
+    .bg-blue { background-color: var(--color-blue); }
+    .bg-red { background-color: var(--color-red); }
+    .bg-yellow { background-color: var(--color-yellow); }
+    .bg-green { background-color: var(--color-green); }
+    .bg-secondBlue { background-color: var(--color-secondaryBlue); }
+    .text-heading { color: var(--color-heading); }
+    .text-body { color: var(--color-text); }
+}

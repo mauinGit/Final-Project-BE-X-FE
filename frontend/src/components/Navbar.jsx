@@ -7,31 +7,31 @@ export default function Navbar() {
 
     return(
         <nav id="navbar" className="font-Open Sans sticky top-0 w-full z-50 bg-white/20 backdrop-blur-lg">
-            <div className="flex flex-wrap items-center justify-between px-5 sm:px-8 lg:px-20 py-4 lg:py-6 gap-y-4 gap-x-6">
+            <div className="flex flex-wrap items-center justify-between px-5 sm:px-8 lg:px-20 py-4 gap-y-4 gap-x-6">
                 <div className="flex flex-wrap gap-4 justify-center items-center">
                     <img 
-                        src="/assets/logoGDC.png" 
+                        src="/assets/logoGDC.svg" 
                         alt="logo GDCourse" 
                         className="w-15 h-12 sm:w-26 sm:h-22"
                     />
                     <h1 className="text-4xl font-bold text-heading">GDCourse</h1>
                 </div>
                 <ul className="hidden lg:flex font-normal gap-15 text-xl">
-                    <li className="transition-all text-body cursor-pointer hover:text-blue hover:font-medium ">
+                    <li className="transition-all text-gray-500 cursor-pointer hover:text-blue hover:font-medium ">
                         <NavLink 
                             to="/"
                         >
                             Home
                         </NavLink>
                     </li>
-                    <li className="transition-all text-body cursor-pointer hover:text-blue hover:font-medium ">
+                    <li className="transition-all text-gray-500 cursor-pointer hover:text-blue hover:font-medium ">
                         <NavLink 
                             to="/courses"
                         >
                             Courses
                         </NavLink>
                     </li>
-                        <li className="transition-all text-body cursor-pointer hover:text-blue hover:font-medium ">
+                        <li className="transition-all text-gray-500 cursor-pointer hover:text-blue hover:font-medium ">
                         <NavLink 
                             to="/contact"
                         >
@@ -42,7 +42,7 @@ export default function Navbar() {
                 <div className="flex-row gap-10 items-center hidden lg:flex">
                     <NavLink
                         to="/login"
-                        className="transition-all text-xl text-body hover:text-blue"
+                        className="transition-all text-xl text-gray-500 hover:text-blue"
                     >
                         Login
                     </NavLink>
@@ -73,21 +73,21 @@ export default function Navbar() {
                 {isMenuOpen && (
                     <div className="lg:hidden bg-white absolute py-5 top-full left-0 w-full h-screen shadow-xl">
                         <ul className="flex flex-col px-5 gap-5 text-xl">
-                            <li className="transition-all text-body cursor-pointer hover:text-blue hover:font-medium ">
+                            <li className="transition-all text-gray-500 cursor-pointer hover:text-blue hover:font-medium ">
                                 <NavLink 
                                     to="/"
                                 >
                                     Home
                                 </NavLink>
                             </li>
-                            <li className="transition-all text-body cursor-pointer hover:text-blue hover:font-medium ">
+                            <li className="transition-all text-gray-500 cursor-pointer hover:text-blue hover:font-medium ">
                                 <NavLink 
                                     to="/courses"
                                 >
                                     Courses
                                 </NavLink>
                             </li>
-                                <li className="transition-all text-body cursor-pointer hover:text-blue hover:font-medium ">
+                                <li className="transition-all text-gray-500 cursor-pointer hover:text-blue hover:font-medium ">
                                 <NavLink 
                                     to="/contact"
                                 >
@@ -97,7 +97,7 @@ export default function Navbar() {
                             <div className="flex flex-col gap-5 lg:flex">
                                 <NavLink
                                     to="/login"
-                                    className="transition-all text-xl text-body hover:text-blue"
+                                    className="transition-all text-xl text-gray-500 hover:text-blue"
                                 >
                                     Login
                                 </NavLink>

@@ -19,6 +19,7 @@
     .text-green { color: var(--color-green); }
     .bg-blue { background-color: var(--color-blue); }
     .bg-secondBlue { background-color: var(--color-secondaryBlue); }
+    .bg-red { background-color: var(--color-red); }
     .text-heading { color: var(--color-heading); }
     .text-body { color: var(--color-text); }
 }

@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 export default function Home() {
     return(
         <section id="home"className="font-Open Sans relative w-full min-h-screen mt-8">
-            <div className="flex flex-row justify-between px-5 sm:px-8 lg:px-20 gap-5">
+            <div className="flex flex-row justify-between px-4 sm:px-8 lg:px-20 gap-5">
                 <div className="flex flex-col gap-10">
                     <div className="flex flex-col gap-2">
                         <div className="flex flex-row gap-3">
@@ -36,12 +36,40 @@ export default function Home() {
                             Learn More
                         </a>
                     </div>
+                    <div className="circlePosition w-[260px] h-[200px] bg-blue rounded-full absolute z-1 top-[60%] left-[20%] -translate-x-1/2 -translate-y-1/2 blur-[200px]"></div>
+                    <div className="flex flex-row gap-10 mt-10">
+                        <div className="flex flex-row gap-3">
+                            <img 
+                                src="/assets/icon-cheklist.png" 
+                                alt="cheklist" 
+                                className="bg-blue rounded-full py-2 px-2 border-2"
+                            />
+                            <p className="text-xl text-gray-500">Experienced Instructors</p>
+                        </div>
+                        <div className="flex flex-row gap-3">
+                            <img 
+                                src="/assets/icon-cheklist.png" 
+                                alt="cheklist" 
+                                className="bg-blue rounded-full py-2 px-2 border-2"
+                            />
+                            <p className="text-xl text-gray-500">Quality Video</p>
+                        </div>
+                        <div className="flex flex-row gap-3">
+                            <img 
+                                src="/assets/icon-cheklist.png" 
+                                alt="cheklist" 
+                                className="bg-blue rounded-full py-2 px-2 border-2"
+                            />
+                            <p className="text-xl text-gray-500">Free Access</p>
+                        </div>
+                    </div>
                 </div>
                 <img 
                     src="/assets/img-hero.png" 
                     alt="Hero Home" 
                     className="w-1/2"
                 />
+                <div className="circlePosition w-[200px] h-[140px] bg-red rounded-full absolute z-1 top-[40%] right-[5%] -translate-x-1/2 -translate-y-1/2 blur-[150px]"></div>
             </div>
         </section>
     );

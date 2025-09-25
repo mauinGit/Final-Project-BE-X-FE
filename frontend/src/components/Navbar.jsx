@@ -6,13 +6,13 @@ export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return(
-        <nav id="navbar" className="font-Open Sans sticky top-0 w-full z-50 bg-white/20 backdrop-blur-lg">
-            <div className="flex flex-wrap items-center justify-between px-5 sm:px-8 lg:px-20 py-4 gap-y-4 gap-x-6">
+        <nav id="navbar" className="font-Open Sans sticky top-0 w-full z-50 bg-white/70 backdrop-blur-lg">
+            <div className="flex flex-wrap items-center justify-between px-4 sm:px-8 lg:px-20 py-2 gap-y-4 gap-x-6">
                 <div className="flex flex-wrap gap-4 justify-center items-center">
                     <img 
                         src="/assets/logoGDC.svg" 
                         alt="logo GDCourse" 
-                        className="w-15 h-12 sm:w-26 sm:h-22"
+                        className="w-15 h-12 sm:w-24 sm:h-22"
                     />
                     <h1 className="text-4xl font-bold text-heading">GDCourse</h1>
                 </div>
@@ -72,7 +72,7 @@ export default function Navbar() {
                 {/* Mobile Menu */}
                 {isMenuOpen && (
                     <div className="lg:hidden bg-white absolute py-5 top-full left-0 w-full h-screen shadow-xl">
-                        <ul className="flex flex-col px-5 gap-5 text-xl">
+                        <ul className="flex flex-col px-4 gap-5 text-xl">
                             <li className="transition-all text-gray-500 cursor-pointer hover:text-blue hover:font-medium ">
                                 <NavLink 
                                     to="/"

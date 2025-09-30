@@ -1,6 +1,12 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import CourseFilter from "../../components/courses/CourseFilter";
+import CourseList from "../../components/courses/CourseList";
+
 
 export default function Home() {
+    const [selectedCategory, setSelectedCategory] = useState("All");
+
     return(
         <section id="home"className="font-Open Sans w-full min-h-screen mt-8">
 
@@ -118,7 +124,8 @@ export default function Home() {
             {/* Section Available Course */}
             <div className="flex flex-col px-4 sm:px-8 lg:px-20 gap-5 py-10">
                 <h1 className="text-4xl font-bold text-heading text-center">Explore All Available Courses</h1>
-
+                <CourseFilter selected={selectedCategory} setSelected={setSelectedCategory}/>
+                <CourseList selectedCategory={selectedCategory}/>
             </div>
 
             {/* Section Testimoni Students */}

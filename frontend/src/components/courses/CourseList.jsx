@@ -6,21 +6,21 @@ const dummyCourses = [
         title: "Introduction to UI/UX Design",
         category: "UI/UX",
         description: "Learn the basics of user interface and user experience design, from wireframing to prototyping.",
-        image: "/assets/courses/intro-uiux.png"
+        image: "/assets/courses/intro-uiux.jpg"
     },
     {
         id: 2,
         title: "Front-End Development with React",
         category: "Front-End",
         description: "Master React to build modern, interactive websites with reusable components.",
-        image: "/assets/courses/react-fe.png"            
+        image: "/assets/courses/react-fe.jpeg"            
     },
     {
         id: 3,
         title: "Mobile Development with Flutter",
         category: "Mobile Development",
         description: "Start building cross-platform mobile apps with Flutter and Dart.",
-        image: "/assets/courses/flutter-mobdev.png"            
+        image: "/assets/courses/flutter-mobdev.jpeg"            
     }
 ];
 
@@ -31,7 +31,7 @@ export default function CourseList({ selectedCategory }) {
             : dummyCourses.filter((course) => course.category === selectedCategory);
 
     return(
-        <div className="grid md:grid-cols-3 gap-6 mt-5">
+        <div className="grid md:grid-cols-3 gap-8 mt-5">
             {filteredCourses.map((course) => (
                 <CourseCard 
                     key={course.id}

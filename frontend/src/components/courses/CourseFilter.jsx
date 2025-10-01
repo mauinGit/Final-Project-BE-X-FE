@@ -1,7 +1,4 @@
-import { useState } from "react";
-
-export default function CourseFilter() {
-    const [selected, setSelected] = useState([]);
+export default function CourseFilter({ selected, setSelected }) {
 
     const categories = [
         "All",
@@ -16,13 +13,13 @@ export default function CourseFilter() {
 
     return(
         <div className="py-4 px-6 flex flex-row justify-between gap-2 bg-secondBlue rounded-full mt-8 text-xl">
-            {categories.map((idx) => (
+            {categories.map((category) => (
                 <button 
-                    key={idx}
-                    onClick={() => setSelected(idx)}
-                    className={`px-3 py-2 ${selected === idx ? "bg-blue text-white rounded-full border-2 border-black cursor-pointer" : "text-gray-500"}`}
+                    key={category}
+                    onClick={() => setSelected(category)}
+                    className={`px-3 py-2 ${selected === category ? "bg-blue text-white rounded-full border-2 border-black cursor-pointer" : "text-gray-500"}`}
                 >
-                    {idx}
+                    {category}
                 </button>
             ))}
         </div>

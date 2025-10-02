@@ -23,6 +23,20 @@ const listTestimonials = [
     text: "The mentors are super helpful and the content is very practical.",
     image: "/assets/testimoni/lia.jpg",
   },
+  {
+    id: 4,
+    name: "Lia Watson",
+    job: "UI/UX Designer",
+    text: "The mentors are super helpful and the content is very practical.",
+    image: "/assets/testimoni/lia.jpg",
+  },
+  {
+    id: 5,
+    name: "Lia Watson",
+    job: "UI/UX Designer",
+    text: "The mentors are super helpful and the content is very practical.",
+    image: "/assets/testimoni/lia.jpg",
+  },
 ];
 
 export default function Testimonials() {
@@ -39,7 +53,7 @@ export default function Testimonials() {
     };
 
     return(
-        <div className="flex flex-col items-center py-12 px-6 overflow-hidden">
+        <div className="flex flex-col items-center py-10 px-4 overflow-hidden">
             <div className="flex gap-2 items-start justify-center">
                 {listTestimonials.map((item, index) => {
                     const isActive = index === activeIndex;
@@ -67,7 +81,7 @@ export default function Testimonials() {
                             <img 
                                 src={item.image} 
                                 alt={item.name}
-                                className={`rounded-full object-cover mb-2 border-2 border-black ${isActive ? "h-34 w-34" : "h-26 w-26"}`}
+                                className={`rounded-full object-cover mb-2 border-2 border-black ${isActive ? "h-40 w-40" : "h-32 w-32"}`}
                             />
                             <AnimatePresence>
                                 {isActive && (

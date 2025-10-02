@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { IoIosArrowRoundForward } from "react-icons/io";
 import CourseFilter from "../../components/courses/CourseFilter";
 import CourseList from "../../components/courses/CourseList";
 import Testimonials from "../../components/Testimonials";
-
+import Footer from "../../components/Footer";
 
 export default function Home() {
     const [selectedCategory, setSelectedCategory] = useState("All");
@@ -130,13 +131,25 @@ export default function Home() {
             </div>
 
             {/* Section Testimoni Students */}
-            <div className="flex flex-col gap-5 py-10">
-                <h1 className="text-4xl font-bold text-heading text-center">What Our Students Say About Us</h1>
+            <div className="flex flex-col px-4 sm:px-8 lg:px-20 py-10 mb-10">
+                <h1 className="text-4xl font-bold text-heading text-center mb-5">What Our Students Say About Us</h1>
                 <Testimonials />
             </div>
 
             {/* Section QnA / Accordian*/}
+            <div className="flex flex-row justify-between px-4 sm:px-8 lg:px-20 mb-20">
+                <div className="flex flex-col gap-8">
+                    <h1 className="text-4xl text-heading font-bold">Any Questions? We Got You</h1>
+                    <p className="text-xl text-gray-500 max-w-2xl leading-tight">Here are some questions about GDCourse . If you have any further questions, please contact us via email at <span className="text-red">gdcourse@gmail.com.</span> Thank you!</p>
+                    <div className="flex flex-row gap-3 items-center">
+                        <p className="text-blue text-xl">More questions</p>
+                        <IoIosArrowRoundForward className="size-7 text-blue" />
+                    </div>
+                </div>
+            </div>
 
+            {/* Footer */}
+            <Footer />
 
         </section>
     );

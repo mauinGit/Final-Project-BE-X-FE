@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 export default function Footer() {
     return(
         <footer className="bg-secondBlue pt-18">
-            <div className="flex flex-col lg:flex-row lg:justify-between px-4 sm:px-16 lg:px-16 gap-10 lg:gap-0">
+            <div className="flex flex-col lg:flex-row lg:justify-between px-4 sm:px-22 gap-10 lg:gap-0">
                 <div className="flex flex-col pr-8 gap-5">
                     <div className="flex flex-row items-center gap-5">
                         <img 
@@ -80,7 +80,7 @@ export default function Footer() {
                 </div>
             </div>
 
-            <div className="flex flex-col py-14 px-7 md:px-16 lg:px-16 gap-8 text-center justify-center items-center">
+            <div className="flex flex-col py-14 px-7 md:px-16 lg:px-22 gap-8 text-center justify-center items-center">
                 <span className="w-full h-0.5 bg-heading"></span>
                 <p className="text-heading font-medium text-lg"> © GDCourse 2025 | Blue Team</p>
             </div>

@@ -4,7 +4,36 @@ import { IoIosArrowRoundForward } from "react-icons/io";
 import CourseFilter from "../../components/courses/CourseFilter";
 import CourseList from "../../components/courses/CourseList";
 import Testimonials from "../../components/Testimonials";
+import Faq, {FaqItem} from "../../components/Faq";
 import Footer from "../../components/Footer";
+
+const listFaq = [
+    {
+        id: 1,
+        question: "What is GDCourse?",
+        answer: "GDCourse is an online learning platform that provides interactive courses to help you improve your skills in technology.",
+    },
+    {
+        id: 2,
+        question: "Is GDCourse free?",
+        answer: "Most of the courses are free to access.",
+    },
+    {
+        id: 3,
+        question: "Can I access the courses on mobile?",
+        answer: "Absolutely! All materials and features on GDCourse are responsive and can be accessed via smartphone, tablet, or laptop.",
+    },
+    {
+        id: 4,
+        question: "Are there mentors available to help?",
+        answer: "Yes, mentors are available to provide guidance through discussion forums.",
+    },
+    {
+        id: 5,
+        question: "How can I track my learning progress?",
+        answer: "Your progress will be saved automatically in your dashboard, where you can see completed lessons and upcoming modules.",
+    },
+];
 
 export default function Home() {
     const [selectedCategory, setSelectedCategory] = useState("All");
@@ -136,8 +165,8 @@ export default function Home() {
                 <Testimonials />
             </div>
 
-            {/* Section QnA / Accordian*/}
-            <div className="flex flex-row justify-between px-4 sm:px-8 lg:px-20 mb-20">
+            {/* Section FAQ */}
+            <div className="flex flex-col lg:flex-row justify-between px-4 sm:px-8 lg:px-20 mb-20">
                 <div className="flex flex-col gap-8">
                     <h1 className="text-4xl text-heading font-bold">Any Questions? We Got You</h1>
                     <p className="text-xl text-gray-500 max-w-2xl leading-tight">Here are some questions about GDCourse . If you have any further questions, please contact us via email at <span className="text-red">gdcourse@gmail.com.</span> Thank you!</p>
@@ -145,6 +174,9 @@ export default function Home() {
                         <p className="text-blue text-xl">More questions</p>
                         <IoIosArrowRoundForward className="size-7 text-blue" />
                     </div>
+                </div>
+                <div className="flex flex-col items-center justify-center">
+                    <Faq  className="max-w-lg" items={listFaq} />
                 </div>
             </div>
 

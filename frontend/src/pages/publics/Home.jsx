@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import CourseFilter from "../../components/courses/CourseFilter";
 import CourseList from "../../components/courses/CourseList";
+import Testimonials from "../../components/Testimonials";
 
 
 export default function Home() {
@@ -129,8 +130,12 @@ export default function Home() {
             </div>
 
             {/* Section Testimoni Students */}
+            <div className="flex flex-col gap-5 py-10">
+                <h1 className="text-4xl font-bold text-heading text-center">What Our Students Say About Us</h1>
+                <Testimonials />
+            </div>
 
-            {/* Section QnA */}
+            {/* Section QnA / Accordian*/}
 
 
         </section>

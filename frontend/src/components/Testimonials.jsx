@@ -25,22 +25,22 @@ const listTestimonials = [
   },
   {
     id: 4,
-    name: "Lia Watson",
-    job: "UI/UX Designer",
-    text: "The mentors are super helpful and the content is very practical.",
-    image: "/assets/testimoni/lia.jpg",
+    name: "Kevin Tan",
+    job: "Software Engineer Intern",
+    text: "Thanks to the community and mentors, I was able to build strong projects and grow my skills quickly.",
+    image: "/assets/testimoni/kevin.jpg",
   },
   {
     id: 5,
-    name: "Lia Watson",
-    job: "UI/UX Designer",
-    text: "The mentors are super helpful and the content is very practical.",
-    image: "/assets/testimoni/lia.jpg",
+    name: "Xu Yuan",
+    job: "Information Systems Student",
+    text: "The projects helped me improve my portfolio and stand out during internship applications.",
+    image: "/assets/testimoni/xuYuan.jpg",
   },
 ];
 
 export default function Testimonials() {
-    const [activeIndex, setActiveIndex] = useState(0);
+    const [activeIndex, setActiveIndex] = useState(2);
 
     const handleSwipe = (direction) => {
         if(direction === "left") {
@@ -53,8 +53,8 @@ export default function Testimonials() {
     };
 
     return(
-        <div className="flex flex-col items-center py-10 px-4 overflow-hidden">
-            <div className="flex gap-2 items-start justify-center">
+        <div className="flex flex-col items-center py-10 px-4 sm:px-8 md:px-16 lg:px-28 overflow-hidden w-full">
+            <div className="relative flex items-center justify-center w-full max-w-6xl">
                 {listTestimonials.map((item, index) => {
                     const isActive = index === activeIndex;
                     const position = index - activeIndex; 
@@ -69,7 +69,7 @@ export default function Testimonials() {
                                 if (info.offset.x > 100) handleSwipe("right");
                             }}
                             animate={{ 
-                                x: position * 50,
+                                x: position * 20,
                                 y: isActive ? 0 : 20,
                                 scale: isActive ? 1 : 0.8,
                                 opacity: isActive ? 1 : 0.6,
@@ -81,7 +81,7 @@ export default function Testimonials() {
                             <img 
                                 src={item.image} 
                                 alt={item.name}
-                                className={`rounded-full object-cover mb-2 border-2 border-black ${isActive ? "h-40 w-40" : "h-32 w-32"}`}
+                                className={`rounded-full object-cover mb-2 border-2 border-black ${isActive ? "h-44 w-44" : "h-36 w-36"}`}
                             />
                             <AnimatePresence>
                                 {isActive && (

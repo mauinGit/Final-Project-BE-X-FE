@@ -39,20 +39,20 @@ export default function Home() {
     const [selectedCategory, setSelectedCategory] = useState("All");
 
     return(
-        <section id="home"className="font-Open Sans w-full min-h-screen mt-8">
+        <section id="home"className="font-Open Sans w-full min-h-screen mt-8 overflow-x-hidden">
 
             {/* Section Hero */}
-            <div className="relative flex flex-row justify-between px-4 sm:px-8 lg:px-20">
-                <div className="flex flex-col gap-10">
-                    <div className="flex flex-col gap-2">
-                        <div className="flex flex-row gap-3">
+            <div className="relative flex flex-col lg:flex-row justify-between items-center px-4 sm:px-8 lg:px-20">
+                <div className="flex flex-col gap-10 text-center lg:text-left">
+                    <div className="flex flex-col gap-2 items-center lg:items-start">
+                        <div className="flex flex-row gap-3 items-center">
                             <img 
                                 src="/assets/Logo GDG.svg" 
                                 alt="Logo GDGOC UNSRI" 
                             />
                             <p className="text-base text-heading font-medium">GDGoC Universitas Sriwijaya</p>
                         </div>
-                        <p className="text-6xl font-bold text-heading max-w-2xl leading-tight">
+                        <p className="text-4xl sm:text-5xl lg:text-6xl font-bold text-heading max-w-2xl leading-tight">
                             Learn, Build, and Grow with <span className="text-blue">G</span>
                             <span className="text-red">D</span>
                             <span className="text-yellow">G</span>
@@ -60,8 +60,8 @@ export default function Home() {
                             <span className="text-blue">C</span> Online Courses
                         </p>
                     </div>
-                    <p className="text-xl text-gray-500 max-w-2xl leading-tight">Unlock new opportunities with GDCourse Online Courses. Learn from experts, collaborate with peers, and gain practical knowledge that empowers your journey in tech.</p>
-                    <div className="flex flex-row gap-5 items-center">
+                    <p className="text-lg sm:text-xl text-gray-500 max-w-2xl leading-tight">Unlock new opportunities with GDCourse Online Courses. Learn from experts, collaborate with peers, and gain practical knowledge that empowers your journey in tech.</p>
+                    <div className="flex flex-col sm:flex-row gap-5 items-center justify-center lg:justify-start">
                         <NavLink
                             to="/login"
                             className="px-4 py-2 text-white text-xl bg-blue rounded-full border-2 border-black hover:opacity-90 transition-transform duration-300 ease-in-out hover:shadow-lg"
@@ -76,8 +76,8 @@ export default function Home() {
                         </a>
                     </div>
                     <div className="circlePosition w-[260px] h-[200px] bg-blue rounded-full absolute z-1 top-[60%] left-[20%] -translate-x-1/2 -translate-y-1/2 blur-[200px]"></div>
-                    <ul className="flex flex-row gap-10 mt-10">
-                        <li className="flex flex-row gap-3">
+                    <ul className="flex flex-wrap gap-10 mt-10 justify-center mb-10">
+                        <li className="flex flex-row gap-3 items-center">
                             <img 
                                 src="/assets/icon-cheklist.png" 
                                 alt="cheklist" 
@@ -85,7 +85,7 @@ export default function Home() {
                             />
                             <p className="text-xl text-gray-500">Experienced Instructors</p>
                         </li>
-                        <li className="flex flex-row gap-3">
+                        <li className="flex flex-row gap-3 items-center">
                             <img 
                                 src="/assets/icon-cheklist.png" 
                                 alt="cheklist" 
@@ -93,7 +93,7 @@ export default function Home() {
                             />
                             <p className="text-xl text-gray-500">Quality Video</p>
                         </li>
-                        <li className="flex flex-row gap-3">
+                        <li className="flex flex-row gap-3 items-center">
                             <img 
                                 src="/assets/icon-cheklist.png" 
                                 alt="cheklist" 
@@ -106,13 +106,13 @@ export default function Home() {
                 <img 
                     src="/assets/img-hero.png" 
                     alt="Hero Home" 
-                    className="w-1/2"
+                    className="w-full sm:w-3/4 lg:w-1/2 items-center justify-center lg:block hidden"
                 />
                 <div className="circlePosition w-[200px] h-[140px] bg-red rounded-full absolute z-1 top-[40%] right-[5%] -translate-x-1/2 -translate-y-1/2 blur-[150px]"></div>
             </div>
 
             {/* Section Benefit GDC */}
-            <div className="flex flex-row justify-between px-4 sm:px-8 lg:px-20 gap-5 py-26">
+            <div className="flex flex-col lg:flex-row justify-between items-center px-4 sm:px-8 lg:px-20 gap-5 py-26">
                 <div className="flex flex-col gap-10">
                     <h1 className="text-4xl text-heading font-bold">Innovating Education For Every Learner</h1>
                     <ul className="flex flex-col gap-4 mt-8">
@@ -140,7 +140,7 @@ export default function Home() {
                     </ul>
                 <NavLink 
                     to="/courses"
-                    className="self-start inline-block px-4 py-2 text-white text-xl bg-blue rounded-full border-2 border-black hover:opacity-90 transition-transform duration-300 ease-in-out hover:shadow-lg"
+                    className="self-start inline-block px-4 py-2 mb-10 text-white text-xl bg-blue rounded-full border-2 border-black hover:opacity-90 transition-transform duration-300 ease-in-out hover:shadow-lg"
                 >
                     Explore Courses
                 </NavLink>
@@ -148,7 +148,7 @@ export default function Home() {
                 <img 
                     src="/assets/img-benefit.png" 
                     alt="Image Innovating Education" 
-                    className="w-1/2"
+                    className="w-full sm:w-3/4 lg:w-1/2 object-contain"
                 />
             </div>
 
@@ -160,7 +160,7 @@ export default function Home() {
             </div>
 
             {/* Section Testimoni Students */}
-            <div className="flex flex-col px-4 sm:px-8 lg:px-20 py-10 mb-10">
+            <div className="flex flex-col px-4 items-center justify-center sm:px-8 lg:px-20 py-10 mb-10">
                 <h1 className="text-4xl font-bold text-heading text-center mb-5">What Our Students Say About Us</h1>
                 <Testimonials />
             </div>
@@ -170,12 +170,12 @@ export default function Home() {
                 <div className="flex flex-col gap-8">
                     <h1 className="text-4xl text-heading font-bold">Any Questions? We Got You</h1>
                     <p className="text-xl text-gray-500 max-w-2xl leading-tight">Here are some questions about GDCourse . If you have any further questions, please contact us via email at <span className="text-red">gdcourse@gmail.com.</span> Thank you!</p>
-                    <div className="flex flex-row gap-3 items-center">
+                    <div className="flex flex-row gap-3 items-center mb-8">
                         <p className="text-blue text-xl">More questions</p>
                         <IoIosArrowRoundForward className="size-7 text-blue" />
                     </div>
                 </div>
-                <div className="flex flex-col items-center justify-center">
+                <div className="flex flex-col">
                     <Faq  className="max-w-lg" items={listFaq} />
                 </div>
             </div>

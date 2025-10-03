@@ -38,7 +38,7 @@ export function FaqItem({ children, value, trigger, ...props }) {
             <header
                 role="button"
                 onClick={() => setSelected(open ? null : value)}
-                className="flex justify-between items-center py-4 px-3 font-medium text-xl text-heading"
+                className="flex justify-between py-4 px-2 font-medium text-xl text-heading"
             >
                 {trigger}
                 <LuChevronDown 
@@ -50,7 +50,7 @@ export function FaqItem({ children, value, trigger, ...props }) {
                 className="overflow-y-hidden transition-all text-xl text-gray-500"
                 style={{ height: open ? ref.current?.offsetHeight || 0 : 0}}
             >
-                <div className="pt-2 py-6 px-3" ref={ref}>
+                <div className="pt-2 py-6 px-2" ref={ref}>
                     {children}
                 </div>
             </div>

@@ -10,7 +10,7 @@ export default function Navbar() {
             <div className="flex flex-wrap items-center justify-between px-4 sm:px-8 lg:px-20 py-2 gap-y-4 gap-x-6">
                 <div className="flex flex-wrap gap-4 justify-center items-center">
                     <img 
-                        src="/assets/logoGDC.svg" 
+                        src="/assets/logo/logoGDC.svg" 
                         alt="logo GDCourse" 
                         className="w-15 h-12 sm:w-24 sm:h-22"
                     />

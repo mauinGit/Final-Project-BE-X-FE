@@ -1,0 +1,44 @@
+import { useState } from "react";
+import { IoSearchOutline } from "react-icons/io5";
+import { TbX } from "react-icons/tb";
+
+export default function SearchBar() {
+    const [searchInput, setSearchInput] = useState("");
+
+    const handleSearch = async () => {
+        // nanti diisi harap bersabar...
+    }
+
+    const handleClear = () => {
+        setSearchInput("");
+    };
+
+    return(
+        <div className="relative flex p-3 px-5 gap-2 w-full max-w-md items-center border-2 border-black rounded-full bg-secondaryBlue">
+            <IoSearchOutline 
+                size={28}
+                className="text-white bg-blue rounded-full p-1"
+            />
+            <input 
+                type="input" 
+                placeholder="Course title or keyword"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                onKeyDown={e => {
+                    if(e.key == "Enter") {
+                        handleSearch();
+                    }
+                }}
+                className={`flex-1 h-full text-xl rounded-full outline-none border-none px-5 transition duration-300 ${searchInput ? "text-heading" : "text-gray-500"}`}
+            />
+            {handleSearch && (
+                <button
+                    onClick={handleClear}
+                    className="absolute right-4 text-gray-500 hover:text-heading cursor-pointer"
+                >
+                    <TbX size={24} />
+                </button>
+            )}
+        </div>
+    );
+};

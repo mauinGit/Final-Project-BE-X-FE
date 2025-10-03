@@ -7,7 +7,7 @@ export default function Footer() {
                 <div className="flex flex-col pr-8 gap-5">
                     <div className="flex flex-row items-center gap-5">
                         <img 
-                            src="/assets/logoGDC.svg" 
+                            src="/assets/logo/logoGDC.svg" 
                             alt="Logo UNSRI" 
                             className="w-26 h-full"
                         />

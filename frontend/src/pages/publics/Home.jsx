@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import CourseFilter from "../../components/courses/CourseFilter";
@@ -6,6 +5,8 @@ import CourseList from "../../components/courses/CourseList";
 import Testimonials from "../../components/Testimonials";
 import Faq, {FaqItem} from "../../components/Faq";
 import Footer from "../../components/Footer";
+import { useContext } from "react";
+import { CategoryContext } from "../../App";
 
 const listFaq = [
     {
@@ -36,7 +37,7 @@ const listFaq = [
 ];
 
 export default function Home() {
-    const [selectedCategory, setSelectedCategory] = useState("All");
+    const { selectedCategory, setSelectedCategory } = useContext(CategoryContext);
 
     return(
         <section id="home"className="font-Open Sans w-full min-h-screen mt-8 overflow-x-hidden">
@@ -47,7 +48,7 @@ export default function Home() {
                     <div className="flex flex-col gap-2 items-center lg:items-start">
                         <div className="flex flex-row gap-3 items-center">
                             <img 
-                                src="/assets/Logo GDG.svg" 
+                                src="/assets/logo/Logo GDG.svg" 
                                 alt="Logo GDGOC UNSRI" 
                             />
                             <p className="text-base text-heading font-medium">GDGoC Universitas Sriwijaya</p>
@@ -79,7 +80,7 @@ export default function Home() {
                     <ul className="flex flex-wrap gap-10 mt-10 justify-center mb-10">
                         <li className="flex flex-row gap-3 items-center">
                             <img 
-                                src="/assets/icon-cheklist.png" 
+                                src="/assets/icons/icon-cheklist.png" 
                                 alt="cheklist" 
                                 className="bg-blue rounded-full py-2 px-2 border-2"
                             />
@@ -87,7 +88,7 @@ export default function Home() {
                         </li>
                         <li className="flex flex-row gap-3 items-center">
                             <img 
-                                src="/assets/icon-cheklist.png" 
+                                src="/assets/icons/icon-cheklist.png" 
                                 alt="cheklist" 
                                 className="bg-blue rounded-full py-2 px-2 border-2"
                             />
@@ -95,7 +96,7 @@ export default function Home() {
                         </li>
                         <li className="flex flex-row gap-3 items-center">
                             <img 
-                                src="/assets/icon-cheklist.png" 
+                                src="/assets/icons/icon-cheklist.png" 
                                 alt="cheklist" 
                                 className="bg-blue rounded-full py-2 px-2 border-2"
                             />
@@ -104,7 +105,7 @@ export default function Home() {
                     </ul>
                 </div>
                 <img 
-                    src="/assets/img-hero.png" 
+                    src="/assets/images/img-hero.png" 
                     alt="Hero Home" 
                     className="w-full sm:w-3/4 lg:w-1/2 items-center justify-center lg:block hidden"
                 />
@@ -118,21 +119,21 @@ export default function Home() {
                     <ul className="flex flex-col gap-4 mt-8">
                         <li className="flex flex-row gap-4 text-gray-500 text-xl">
                             <img 
-                                src="/assets/checklist.png" 
+                                src="/assets/icons/checklist.png" 
                                 className="w-8 h-auto"
                             />
                             Join free courses anytime
                         </li>
                         <li className="flex flex-row gap-4 text-gray-500 text-xl">
                             <img 
-                                src="/assets/checklist.png" 
+                                src="/assets/icons/checklist.png" 
                                 className="w-8 h-auto"
                             />
                             Learn new skills together
                         </li>
                         <li className="flex flex-row gap-4 text-gray-500 text-xl">
                             <img 
-                                src="/assets/checklist.png" 
+                                src="/assets/icons/checklist.png" 
                                 className="w-8 h-auto"
                             />
                             Get support from mentors
@@ -146,7 +147,7 @@ export default function Home() {
                 </NavLink>
                 </div>
                 <img 
-                    src="/assets/img-benefit.png" 
+                    src="/assets/images/img-benefit.png" 
                     alt="Image Innovating Education" 
                     className="w-full sm:w-3/4 lg:w-1/2 object-contain"
                 />

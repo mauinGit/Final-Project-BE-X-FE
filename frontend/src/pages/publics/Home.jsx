@@ -40,7 +40,7 @@ export default function Home() {
     const { selectedCategory, setSelectedCategory } = useContext(CategoryContext);
 
     return(
-        <section id="home"className="font-Open Sans w-full min-h-screen mt-8 overflow-x-hidden">
+        <section id="home"className="font-Open Sans w-full min-h-screen pt-15 overflow-x-hidden">
 
             {/* Section Hero */}
             <div className="relative flex flex-col lg:flex-row justify-between items-center px-4 sm:px-8 lg:px-20">

@@ -9,7 +9,7 @@ export default function Courses() {
     const { selectedCategory, setSelectedCategory } = useContext(CategoryContext);
 
     return(
-        <section id="courses" className="font-Open Sans w-full min-h-screen pt-48 overflow-x-hidden">
+        <section id="courses" className="font-Open Sans w-full min-h-screen pt-10 lg:pt-48 overflow-x-hidden">
 
             {/* Section Hero */}
             <div className="relative mb-20 px-4 sm:px-8 lg:px-20">
@@ -17,9 +17,9 @@ export default function Courses() {
                     <img 
                         src="/assets/images/hero-courses.svg" 
                         alt="Hero Illustration"
-                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none -z-10"
+                        className="lg:block hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none -z-10"
                     />
-                    <h1 className="text-6xl text-heading font-bold text-center">Explore <span className="text-blue">Courses</span>, <span className="text-red">Learn</span> with <span className="text-green">Ease</span></h1>
+                    <h1 className="text-4xl sm:text-5xl lg:text-6xl text-heading font-bold text-center">Explore <span className="text-blue">Courses</span>, <span className="text-red">Learn</span> with <span className="text-green">Ease</span></h1>
                     <p className="text-xl text-gray-500 text-center">When you’re exploring courses, there are a few ways to make the most of your learning.</p>
                     <SearchBar />
                 </div>
@@ -28,7 +28,7 @@ export default function Courses() {
             </div>
 
             {/* Section Courses */}
-            <div className="flex flex-col px-4 sm:px-8 lg:px-20 gap-5 py-30">
+            <div className="flex flex-col px-4 sm:px-8 lg:px-20 gap-5 py:10 lg:py-30 mb-20">
                 <h1 className="text-4xl font-bold text-heading text-center">All Courses</h1>
                 <CourseFilter selected={selectedCategory} setSelected={setSelectedCategory}/>
                 <CourseList selectedCategory={selectedCategory}/>

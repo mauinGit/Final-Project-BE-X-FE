@@ -1,17 +1,22 @@
 package main
 
 import (
-    "log"
+	"finalBeFe/config"
+	"finalBeFe/database"
+	"finalBeFe/routes"
+	"log"
 
-    "github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2"
 )
 
 func main() {
-    app := fiber.New()
+	config.ENVInit()
+	database.DBInit()
+	database.DBMigrate()
+	app := fiber.New(fiber.Config{
+    	BodyLimit: 50 * 1024 * 1024,
+	})
+	routes.MainRoutes(app)
 
-    app.Get("/", func (c *fiber.Ctx) error {
-        return c.SendString("Hello, World!")
-    })
-
-    log.Fatal(app.Listen(":3000"))
+	log.Fatal(app.Listen(":8080"))
 }

@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import CourseFilter from "../../components/courses/CourseFilter";
 import CourseList from "../../components/courses/CourseList";
+import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import SearchBar from "../../components/SearchBar";
 import { CategoryContext } from "../../App";
@@ -9,10 +10,11 @@ export default function Courses() {
     const { selectedCategory, setSelectedCategory } = useContext(CategoryContext);
 
     return(
-        <section id="courses" className="font-Open Sans w-full min-h-screen pt-10 lg:pt-48 overflow-x-hidden">
+        <section id="courses" className="font-Open Sans w-full min-h-screen overflow-x-hidden">
+            <Navbar />
 
             {/* Section Hero */}
-            <div className="relative mb-20 px-4 sm:px-8 lg:px-20">
+            <div className="relative mb-20 px-4 pt-10 lg:pt-20 sm:px-8 lg:px-20">
                 <div className="flex flex-col items-center justify-center gap-10">
                     <img 
                         src="/assets/images/hero-courses.svg" 
@@ -28,7 +30,7 @@ export default function Courses() {
             </div>
 
             {/* Section Courses */}
-            <div className="flex flex-col px-4 sm:px-8 lg:px-20 gap-5 py:10 lg:py-30 mb-20">
+            <div className="flex flex-col px-4 sm:px-8 lg:px-20 gap-5 py:10 lg:py-30 mb-10">
                 <h1 className="text-4xl font-bold text-heading text-center">All Courses</h1>
                 <CourseFilter selected={selectedCategory} setSelected={setSelectedCategory}/>
                 <CourseList selectedCategory={selectedCategory}/>

@@ -2,11 +2,13 @@ import Footer from "../../components/Footer";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaInstagram } from "react-icons/fa6";
 import { GrYoutube } from "react-icons/gr";
+import Navbar from "../../components/Navbar";
 
 export default function Contact() {
     return(
-        <section id="contact" className="font-Open Sans w-full min-h-screen pt-12 overflow-x-hidden">
-            <div className="relative flex flex-col lg:flex-row justify-between items-start px-4 sm:px-8 lg:px-20 mb-20">
+        <section id="contact" className="font-Open Sans w-full min-h-screen overflow-x-hidden">
+            <Navbar />
+            <div className="relative flex flex-col lg:flex-row justify-between items-start pt-10 px-4 sm:px-8 lg:px-20 mb-20">
 
                 {/* Section Get In Touch */}
                 <div className="flex flex-col gap-8">

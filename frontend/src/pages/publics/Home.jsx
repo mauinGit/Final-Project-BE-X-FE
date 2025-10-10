@@ -4,6 +4,7 @@ import CourseFilter from "../../components/courses/CourseFilter";
 import CourseList from "../../components/courses/CourseList";
 import Testimonials from "../../components/Testimonials";
 import Faq, {FaqItem} from "../../components/Faq";
+import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { useContext } from "react";
 import { CategoryContext } from "../../App";
@@ -40,10 +41,11 @@ export default function Home() {
     const { selectedCategory, setSelectedCategory } = useContext(CategoryContext);
 
     return(
-        <section id="home"className="font-Open Sans w-full min-h-screen pt-15 overflow-x-hidden">
+        <section id="home"className="font-Open Sans w-full min-h-screen overflow-x-hidden">
+            <Navbar />
 
             {/* Section Hero */}
-            <div className="relative flex flex-col lg:flex-row justify-between items-center px-4 sm:px-8 lg:px-20">
+            <div className="relative flex flex-col lg:flex-row justify-between items-center px-4 pt-10 sm:px-8 lg:px-20">
                 <div className="flex flex-col gap-10 text-center lg:text-left">
                     <div className="flex flex-col gap-2 items-center lg:items-start">
                         <div className="flex flex-row gap-3 items-center">

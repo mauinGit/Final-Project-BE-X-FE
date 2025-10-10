@@ -5,6 +5,7 @@ import Home from "./pages/publics/Home";
 import Courses from "./pages/publics/Courses";
 import Contact from "./pages/publics/Contact";
 import SignUp from "./pages/publics/SignUp";
+import Login from "./pages/publics/Login";
 
 export const CategoryContext = createContext();
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/courses" element={<Courses />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/signUp" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
 
         {/* Student Routes */}
         

@@ -18,14 +18,14 @@ export default function Footer() {
                 <div className="flex flex-col pr-16 md:px-1 xl:px-10 lg:px-22 gap-5">
                     <h3 className="text-2xl font-medium text-heading">Courses</h3>
                     <ul className="flex flex-col gap-1">
-                        <li className="text-gray-500 text-lg">Video Courses</li>
-                        <li className="text-gray-500 text-lg">E-Learning Courses</li>
+                        <li className="text-gray-500 text-xl">Video Courses</li>
+                        <li className="text-gray-500 text-xl">E-Learning Courses</li>
                     </ul>
                 </div>
                 <div className="flex flex-col pr-16 md:px-1 xl:px-10 lg:px-22 gap-5">
                     <h3 className="text-2xl font-medium text-heading">Contact Us</h3>
                     <div className="flex flex-col gap-1">
-                        <p className="text-gray-500 text-lg">
+                        <p className="text-gray-500 text-xl">
                             Line: 
                             <span className="px-2">
                                 <a 
@@ -36,7 +36,7 @@ export default function Footer() {
                                 </a>
                             </span>
                         </p>
-                        <p className="text-gray-500 text-lg">
+                        <p className="text-gray-500 text-xl">
                             Email: 
                             <span className="px-2">
                                 <a 
@@ -60,7 +60,7 @@ export default function Footer() {
                                 Home
                             </NavLink>
                         </li>
-                        <li className="text-gray-500 text-lg hover:font-medium hover:text-blue">
+                        <li className="text-gray-500 text-xl hover:font-medium hover:text-blue">
                             <NavLink 
                             to="/courses"
                             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
@@ -68,7 +68,7 @@ export default function Footer() {
                                 Courses
                             </NavLink>
                         </li>
-                        <li className="text-gray-500 text-lg hover:font-medium hover:text-blue">
+                        <li className="text-gray-500 text-xl hover:font-medium hover:text-blue">
                             <NavLink 
                             to="/contact"
                             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
@@ -82,7 +82,7 @@ export default function Footer() {
 
             <div className="flex flex-col py-14 px-7 md:px-16 lg:px-22 gap-8 text-center justify-center items-center">
                 <span className="w-full h-0.5 bg-heading"></span>
-                <p className="text-heading font-medium text-lg"> © GDCourse 2025 | Blue Team</p>
+                <p className="text-heading font-medium text-xl"> © GDCourse 2025 | Blue Team</p>
             </div>
         </footer>
     );

@@ -3,6 +3,7 @@ import { createContext } from "react";
 import useCategory from "./hooks/useCategory";
 import Home from "./pages/publics/Home";
 import Courses from "./pages/publics/Courses";
+import CourseDetail from "./pages/publics/CourseDetail";
 import Contact from "./pages/publics/Contact";
 import SignUp from "./pages/publics/SignUp";
 import Login from "./pages/publics/Login";
@@ -19,16 +20,17 @@ function App() {
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/courses" element={<Courses />} />
+        <Route path="/courses/:id" element={<CourseDetail />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
 
         {/* Student Routes */}
-        
 
-        {/* Intructor Routes */}
 
         {/* Admin Routes */}
+
+
       </Routes>
     </CategoryContext.Provider>
   );

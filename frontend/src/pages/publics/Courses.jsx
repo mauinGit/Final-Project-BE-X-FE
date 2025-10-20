@@ -10,7 +10,7 @@ export default function Courses() {
     const { selectedCategory, setSelectedCategory } = useContext(CategoryContext);
 
     return(
-        <section id="courses" className="font-Open Sans w-full min-h-screen overflow-x-hidden">
+        <section id="courses" className="font-Open Sans w-full min-h-screen">
             <Navbar />
 
             {/* Section Hero */}

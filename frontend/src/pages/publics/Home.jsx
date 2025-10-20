@@ -41,7 +41,7 @@ export default function Home() {
     const { selectedCategory, setSelectedCategory } = useContext(CategoryContext);
 
     return(
-        <section id="home"className="font-Open Sans w-full min-h-screen overflow-x-hidden">
+        <section id="home"className="font-Open Sans w-full min-h-screen">
             <Navbar />
 
             {/* Section Hero */}

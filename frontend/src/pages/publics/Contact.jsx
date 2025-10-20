@@ -6,7 +6,7 @@ import Navbar from "../../components/Navbar";
 
 export default function Contact() {
     return(
-        <section id="contact" className="font-Open Sans w-full min-h-screen overflow-x-hidden">
+        <section id="contact" className="font-Open Sans w-full min-h-screen">
             <Navbar />
             <div className="relative flex flex-col lg:flex-row justify-between items-start pt-10 px-4 sm:px-8 lg:px-20 mb-20">
 

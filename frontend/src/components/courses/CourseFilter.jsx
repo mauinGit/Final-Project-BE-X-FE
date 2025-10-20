@@ -12,7 +12,7 @@ export default function CourseFilter({ selected, setSelected }) {
     ];
 
     return(
-        <div className="py-4 px-4 sm:px-6 flex gap-8 bg-secondBlue rounded-full mt-8 text-base sm:text-xl overflow-x-auto scrollbar-hide">
+        <div className="py-4 px-4 sm:px-6 flex items-center justify-center gap-8 bg-secondBlue rounded-full mt-8 text-base sm:text-xl overflow-x-auto scrollbar-hide">
             {categories.map((category) => (
                 <button 
                     key={category}

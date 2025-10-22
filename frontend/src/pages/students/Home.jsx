@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import CourseList from "../../components/courses/CourseList";
 import { CategoryContext } from "../../App";
+import RecomendedCourse from "../../components/courses/RecomendedCourse";
 
 export default function Home() {
     const { selectedCategory, setSelectedCategory } = useContext(CategoryContext);
@@ -18,8 +18,8 @@ export default function Home() {
             </div>
             <div className="flex flex-col px-4 sm:px-8 lg:px-12 gap-6">
                 <h1 className="text-4xl text-heading font-semibold">For You</h1>
-                <CourseList selectedCategory={selectedCategory}/>
+                <RecomendedCourse selectedCategory={selectedCategory}/>
             </div>
         </section>
-    )
-}
+    );
+};

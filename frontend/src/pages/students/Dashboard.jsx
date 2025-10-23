@@ -1,12 +1,15 @@
 import { useContext } from "react";
 import { CategoryContext } from "../../App";
 import RecomendedCourse from "../../components/courses/RecomendedCourse";
+import SideBarStudent from "../../components/students/SideBarStudent";
 
-export default function Home() {
+
+export default function Dashboard() {
     const { selectedCategory, setSelectedCategory } = useContext(CategoryContext);
 
     return(
-        <section id="studentHome" className="font-Open Sans relative w-full min-h-screen">
+        <section id="dashboard" className="font-Open Sans bg-secondBlue relative w-full min-h-screen">
+            <SideBarStudent />
             <div className="px-4 lg:block hidden sm:px-8 lg:px-12 justify-center items-center mb-20">
                 <img 
                     src="/assets/images/bannerStudent.png" 

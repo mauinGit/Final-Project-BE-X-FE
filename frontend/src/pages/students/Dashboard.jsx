@@ -9,7 +9,7 @@ export default function Dashboard() {
     const { selectedCategory, setSelectedCategory } = useContext(CategoryContext);
 
     return(
-        <section id="dashboard" className="font-Open Sans bg-secondBlue relative w-full min-h-screen flex">
+        <section id="dashboard" className="font-Open Sans bg-secondBlue relative w-full flex">
             <SideBarStudent />
             <div className="flex flex-col flex-1">
                 <TopBar />
@@ -23,7 +23,7 @@ export default function Dashboard() {
                     <div className="flex flex-col px-4 sm:px-6 lg:px-10 mb-20 gap-6">
                         <h1 className="text-4xl text-heading font-semibold">Continue Learning</h1>
                     </div>
-                    <div className="flex flex-col px-4 sm:px-6 lg:px-10 gap-6">
+                    <div className="flex flex-col px-4 sm:px-6 lg:px-10 gap-6 mb-5">
                         <h1 className="text-4xl text-heading font-semibold">For You</h1>
                         <RecomendedCourse selectedCategory={selectedCategory}/>
                     </div>

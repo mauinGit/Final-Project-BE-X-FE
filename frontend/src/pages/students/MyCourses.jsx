@@ -8,7 +8,16 @@ export default function MyCourses() {
             <div className="flex flex-col flex-1">
                 <TopBar />
                 <div className="flex-1">
+                    <div className="flex flex-col px-4 sm:px-6 lg:px-10 mb-5 gap-6">
+                        <div className="flex flex-col gap-5">
+                            <h1 className="text-heading text-2xl sm:text-3xl lg:text-4xl font-semibold">Continue Learning</h1>
 
+                        </div>
+                        <div className="flex flex-col">
+                            <h1 className="text-heading text-2xl sm:text-3xl lg:text-4xl font-semibold">All Courses</h1>
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

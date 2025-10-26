@@ -16,7 +16,7 @@ export default function Courses() {
                 <div className="flex-1">
                     <div className="flex flex-col px-4 sm:px-6 lg:px-10 mb-5 gap-6">
                         <div className="flex flex-row justify-between items-center">
-                            <h1 className="text-4xl text-heading font-semibold">Courses</h1>
+                            <h1 className="text-heading text-2xl sm:text-3xl lg:text-4xl font-semibold">Courses</h1>
                             <DropdownCourse selected={selectedCategory} setSelected={setSelectedCategory}/>
                         </div>
                         <CourseList selectedCategory={selectedCategory}/>

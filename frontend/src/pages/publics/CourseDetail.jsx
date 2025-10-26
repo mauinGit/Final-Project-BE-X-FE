@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { GetCourseById } from "../../service/api";
 import { useParams } from "react-router-dom";
+import CourseComment from "../../components/courses/CourseComment";
 
 export default function CourseDetail() {
     const { id } = useParams();
@@ -44,6 +45,7 @@ export default function CourseDetail() {
                 <div className="flex flex-col gap-5">
                     <h1 className="text-heading text-3xl font-semibold">20 Comments</h1>
                     {/* component comments */}
+                    <CourseComment />
                 </div>
             </div>
         </section>

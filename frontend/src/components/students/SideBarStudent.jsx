@@ -15,7 +15,7 @@ export default function SideBarStudent() {
     };
 
     return(
-        <nav className={`${open ? "w-72 p-5" : "w-28 p-10"} w-2xs flex flex-col bg-white h-screen justify-between relative ease-in-out px-8 pt-5 transition-all duration-300`}>
+        <nav className={`${open ? "w-72 p-5" : "w-28 p-10"} w-2xs flex flex-col bg-white h-screen justify-between relative ease-in-out px-8 pt-10 transition-all duration-300`}>
             <div className="flex flex-col gap-10">
                 <div className="flex gap-4 items-center cursor-pointer" onClick={() => setOpen(!open)}>
                     <img 

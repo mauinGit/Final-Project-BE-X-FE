@@ -14,10 +14,10 @@ export default function SearchBar() {
     };
 
     return(
-        <div className="relative flex p-3 px-5 gap-2 w-full max-w-md items-center border-2 border-black rounded-full bg-secondaryBlue">
+        <div className="relative flex p-3 px-5 gap-2 w-full max-w-xl items-center border-2 border-black rounded-full bg-secondaryBlue">
             <IoSearchOutline 
-                size={28}
-                className="text-white bg-blue rounded-full p-1"
+                size={32}
+                className="text-gray-500 rounded-full p-1"
             />
             <input 
                 type="input" 
@@ -29,12 +29,12 @@ export default function SearchBar() {
                         handleSearch();
                     }
                 }}
-                className={`flex-1 h-full text-xl rounded-full outline-none border-none px-5 transition duration-300 ${searchInput ? "text-heading" : "text-gray-500"}`}
+                className={`flex-1 h-full text-xl rounded-full outline-none border-none px-2 transition duration-300 ${searchInput ? "text-heading" : "text-gray-500"}`}
             />
             {handleSearch && (
                 <button
                     onClick={handleClear}
-                    className="absolute right-4 text-gray-500 hover:text-heading cursor-pointer"
+                    className="absolute right-6 text-gray-500 hover:text-heading cursor-pointer"
                 >
                     <TbX size={24} />
                 </button>

@@ -14,6 +14,12 @@ export default function SideBarStudent() {
         navigate("/login");
     };
 
+    const navItems = [
+        { name: "Dashboard", path: "/student/dashboard", icon: <RxDashboard size={24} /> },
+        { name: "Courses", path: "/student/courseStudent", icon: <GoBook size={24} /> },
+        { name: "My Courses", path: "/student/myCourses", icon: <BsCollection size={24} /> },
+    ];
+
     return(
         <nav className={`${open ? "w-72 p-5" : "w-28 p-10"} w-2xs flex flex-col bg-white h-auto min-h-screen overflow-y-auto justify-between relative ease-in-out px-8 pt-10 transition-all duration-300`}>
             <div className="flex flex-col gap-10">
@@ -26,60 +32,24 @@ export default function SideBarStudent() {
                     <h1 className={`text-heading text-3xl font-bold transition-all duration-300 ${!open && "hidden"}`}>GDCourse</h1>
                 </div>
                 <ul className={`flex flex-col transition-all duration-300 ${open ? "items-start" : "items-center"}`}>
-                    <li className="list-none block h-12 mb-2 relative">
+                    {navItems.map((item, index) => (
+                        <li key={index} className="list-none block h-12 mb-2 relative">
                         <NavLink
-                            to={"student/dashboard"}
-                            className={({ isActive }) => `group flex items-center h-full transition-all text-xl duration-200 ${isActive ? "text-gray-500 " : "text-gray-500 hover:text-blue hover:font-medium"}`}>
-                                {({ isActive }) => (
-                                    <div className="flex relative items-center w-full gap-4">
-                                        <RxDashboard  
-                                            size="24" 
-                                            className={`text-xl transition-colors ${isActive ? "text-blue" : "text-gray-500 group-hover:text-blue"}`}
-                                        />
-                                        <span className={`${!open && "hidden"} transition-colors`}>Dashboard</span>
-                                        {isActive && open && (
-                                            <div className={`absolute top-0 bottom-0 right-57 w-1 transition-all duration-200 ${!open && "left-0"} `}></div>
-                                        )}
-                                    </div>
-                                )}
+                            to={item.path}
+                            className={({ isActive }) =>
+                            `flex items-center w-full gap-4 text-xl transition-all duration-200
+                            ${isActive
+                                ? "text-blue"
+                                : "text-gray-500 hover:text-blue hover:font-medium"
+                            } 
+                            ${open ? "px-1 py-2" : "p-2 justify-center"}`
+                            }
+                        >
+                            {item.icon}
+                            {open && <span>{item.name}</span>}
                         </NavLink>
-                    </li>
-                    <li className="list-none block h-12 mb-2 relative">
-                        <NavLink
-                            to={"/student/courseStudent"}
-                            className={({ isActive }) => `group flex items-center h-full transition-all text-xl duration-200 ${isActive ? "text-gray-500 " : "text-gray-500 hover:text-blue hover:font-medium"}`}>
-                                {({ isActive }) => (
-                                    <div className="flex relative items-center w-full gap-4">
-                                        <GoBook  
-                                            size="24" 
-                                            className={`text-xl transition-colors ${isActive ? "text-blue" : "text-gray-500 group-hover:text-blue"}`}
-                                        />
-                                        <span className={`${!open && "hidden"} transition-colors`}>Courses</span>
-                                        {isActive && open && (
-                                            <div className={`absolute top-0 bottom-0 right-57 w-1 transition-all duration-200 ${!open && "left-0"} `}></div>
-                                        )}
-                                    </div>
-                                )}
-                        </NavLink>
-                    </li>
-                    <li className="list-none block h-12 mb-2 relative">
-                        <NavLink
-                            to={"/student/myCourses"}
-                            className={({ isActive }) => `group flex items-center h-full transition-all text-xl duration-200 ${isActive ? "text-gray-500 " : "text-gray-500 hover:text-blue hover:font-medium"}`}>
-                                {({ isActive }) => (
-                                    <div className="flex relative items-center w-full gap-4">
-                                        <BsCollection   
-                                            size="24" 
-                                            className={`text-xl transition-colors ${isActive ? "text-blue" : "text-gray-500 group-hover:text-blue"}`}
-                                        />
-                                        <span className={`${!open && "hidden"} transition-colors`}>My Courses</span>
-                                        {isActive && open && (
-                                            <div className={`absolute top-0 bottom-0 right-57 w-1 transition-all duration-200 ${!open && "left-0"} `}></div>
-                                        )}
-                                    </div>
-                                )}
-                        </NavLink>
-                    </li>
+                        </li>
+                    ))}
                 </ul>
             </div>
             <button 

@@ -5,7 +5,7 @@ export default function MyCourses() {
     return(
         <section id="myCourses" className="font-Open Sans bg-secondBlue relative w-full flex">
             <SideBarStudent />
-            <div className="flex flex-col flex-1">
+            <div className="flex flex-col flex-1 min-h-screen">
                 <TopBar />
                 <div className="flex-1">
                     <div className="flex flex-col px-4 sm:px-6 lg:px-10 mb-5 gap-6">

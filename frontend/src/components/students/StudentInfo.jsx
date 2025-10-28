@@ -38,16 +38,16 @@ export default function StudentInfo() {
     };
 
     return(
-        <div className="flex flex-row items-center gap-4">
+        <div className="flex items-center gap-3 sm:gap-4">
             {user.profile ? (
                 <img 
                     src={user.profile}
                     alt={user.name} 
-                    className="w-14 h-14 rounded-full object-cover border-2 border-black"
+                    className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full object-cover border-2 border-black"
                 />
             ) : (
                 <div
-                    className="w-14 h-14 rounded-full flex items-center justify-center text-white font-semibold text-xl border-2 border-black"
+                    className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full flex items-center justify-center text-white font-semibold text-base sm:text-lg lg:text-xl border-2 border-black"
                     style={{ 
                         backgroundColor: getColorFromName(user.name),
                      }}
@@ -57,8 +57,8 @@ export default function StudentInfo() {
             )}
 
             <div className="flex flex-col">
-                <h3 className="text-heading text-2xl font-medium">{user.name}</h3>
-                <p className="text-gray-500 text-xl">{user.email}</p>
+                <h3 className="text-heading text-base sm:text-lg lg:text-2xl font-medium">{user.name}</h3>
+                <p className="text-gray-500 text-sm sm:text-base lg:text-xl">{user.email}</p>
             </div>
         </div>
     );

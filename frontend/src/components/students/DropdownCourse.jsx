@@ -43,10 +43,10 @@ export default function DropdownCourse({ selected, setSelected }) {
                                 <div
                                     key={category}
                                     onClick={() => handleSelect(category)}
-                                    className={`px-4 sm:px-6 py-2 sm:text-base md:text-lg cursor-pointer rounded-3xl ${
+                                    className={`px-4 sm:px-6 py-2 sm:text-base md:text-lg cursor-pointer ${
                                         selected === category
-                                            ? "bg-secondaryBlue border-2 border-black text-heading"
-                                            : "hover:bg-secondaryBlue hover:border-2 hover:border-black"
+                                            ? "bg-secondaryBlue text-heading"
+                                            : "hover:bg-secondaryBlue"
                                     }`}
                                 >
                                     {category}

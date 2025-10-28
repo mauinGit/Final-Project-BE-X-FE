@@ -10,6 +10,9 @@ import Login from "./pages/publics/Login";
 import CourseStudent from "./pages/students/Courses";
 import MyCourses from "./pages/students/MyCourses";
 import Dashboard from "./pages/students/Dashboard";
+import Overview from "./pages/admin/Overview";
+import CoursesAdmin from "./pages/admin/Courses";
+import Users from "./pages/admin/Users";
 
 export const CategoryContext = createContext();
 
@@ -34,7 +37,9 @@ function App() {
         <Route path="/student/myCourses" element={<MyCourses />} />
 
         {/* Admin Routes */}
-
+        <Route path="/admin/overview" element={<Overview />} />
+        <Route path="/admin/courses" element={<CoursesAdmin />} />
+        <Route path="/admin/users" element={<Users />} />
 
       </Routes>
     </CategoryContext.Provider>

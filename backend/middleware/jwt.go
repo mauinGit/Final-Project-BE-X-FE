@@ -1,27 +1,52 @@
 package middleware
 
 import (
-	"os"
-	"strings"
-
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v5"
 )
 
-func AdminAuth(c *fiber.Ctx) error {
-	authHeader := c.Get("Authorization")
-	if authHeader == "" {
-		return c.Status(401).JSON(fiber.Map{"error": "missing authorization header"})
+func AdminOnly() fiber.Handler {
+	return func(c *fiber.Ctx) error {
+		// Ambil token dari Cookie dulu
+		tokenString := c.Cookies("token")
+
+		// Jika tidak ada, cek Authorization Header
+		if tokenString == "" {
+			authHeader := c.Get("Authorization")
+			if len(authHeader) > 7 && authHeader[:7] == "Bearer " {
+				tokenString = authHeader[7:]
+			}
+		}
+
+		if tokenString == "" {
+			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+				"error": "Unauthorized - missing token",
+			})
+		}
+
+		token, err := jwt.Parse(tokenString, func(t *jwt.Token) (interface{}, error) {
+			return []byte(GetJWTSecret()), nil
+		})
+
+		if err != nil || !token.Valid {
+			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+				"error": "Unauthorized - invalid token",
+			})
+		}
+
+		claims := token.Claims.(jwt.MapClaims)
+
+		// ✅ Check role disini
+		if claims["role"] != "admin" {
+			return c.Status(fiber.StatusForbidden).JSON(fiber.Map{
+				"error": "Forbidden - Admin Only",
+			})
+		}
+
+		return c.Next()
 	}
+}
 
-	tokenStr := strings.TrimPrefix(authHeader, "Bearer ")
-	token, err := jwt.Parse(tokenStr, func(t *jwt.Token) (interface{}, error) {
-		return []byte(os.Getenv("JWT_SECRET")), nil
-	})
-
-	if err != nil || !token.Valid {
-		return c.Status(401).JSON(fiber.Map{"error": "invalid or expired token"})
-	}
-
-	return c.Next()
+func GetJWTSecret() string {
+	return "SECRET_KEY"
 }

@@ -6,4 +6,5 @@ func MainRoutes(app *fiber.App) {
 	api := app.Group("/api")
 	routesCourse(api)
 	routesCategory(api)
+	routesUser(api)
 }

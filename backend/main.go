@@ -16,6 +16,7 @@ func main() {
 	app := fiber.New(fiber.Config{
     	BodyLimit: 50 * 1024 * 1024,
 	})
+	app.Static("/assets", "./assets")
 	routes.MainRoutes(app)
 
 	log.Fatal(app.Listen(":8080"))

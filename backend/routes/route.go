@@ -7,4 +7,5 @@ func MainRoutes(app *fiber.App) {
 	routesCourse(api)
 	routesCategory(api)
 	routesUser(api)
+	routesContact(api)
 }

@@ -83,34 +83,62 @@ func LoginUser(c *fiber.Ctx) error {
 		})
 	}
 
-	expTime := time.Now().Add(1 * time.Hour)
-
-	claims := jwt.MapClaims{
+	accessExp := time.Now().Add(1 * time.Hour)
+	accessClaims := jwt.MapClaims{
 		"email": user.Email,
 		"role":  user.Role,
-		"exp":   expTime.Unix(),
+		"exp":   accessExp.Unix(),
 		"iss":   "FinalBeFe",
 	}
-
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	tokenString, err := token.SignedString([]byte(middleware.GetJWTSecret()))
+	accessToken := jwt.NewWithClaims(jwt.SigningMethodHS256, accessClaims)
+	accessTokenString, err := accessToken.SignedString([]byte(middleware.GetJWTSecret()))
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"message": "Token generation failed",
+			"message": "Failed to generate access token",
+		})
+	}
+
+	refreshExp := time.Now().Add(7 * 24 * time.Hour)
+	refreshClaims := jwt.MapClaims{
+		"email": user.Email,
+		"exp":   refreshExp.Unix(),
+	}
+	refreshToken := jwt.NewWithClaims(jwt.SigningMethodHS256, refreshClaims)
+	refreshTokenString, err := refreshToken.SignedString([]byte(middleware.GetJWTSecret()))
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"message": "Failed to generate refresh token",
+		})
+	}
+
+	refreshData := model.RefreshToken{
+		UserID: user.ID,
+		Token:  refreshTokenString,
+		Expiry: refreshExp,
+	}
+	if err := database.DB.Create(&refreshData).Error; err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"message": "Failed to save refresh token",
 		})
 	}
 
 	c.Cookie(&fiber.Cookie{
 		Name:     "token",
-		Value:    tokenString,
+		Value:    accessTokenString,
 		Path:     "/",
 		HTTPOnly: true,
-		Expires:  expTime,
+		Expires:  accessExp,
+	})
+	c.Cookie(&fiber.Cookie{
+		Name:     "refresh_token",
+		Value:    refreshTokenString,
+		Path:     "/",
+		HTTPOnly: true,
+		Expires:  refreshExp,
 	})
 
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"message": "login successfully",
-		"token":   tokenString,
 		"user": fiber.Map{
 			"id":    user.ID,
 			"name":  user.Name,
@@ -121,6 +149,12 @@ func LoginUser(c *fiber.Ctx) error {
 }
 
 func LogoutUser(c *fiber.Ctx) error {
+	refreshToken := c.Cookies("refresh_token")
+
+	if refreshToken != "" {
+		database.DB.Where("token = ?", refreshToken).Delete(&model.RefreshToken{})
+	}
+
 	c.Cookie(&fiber.Cookie{
 		Name:     "token",
 		Value:    "",
@@ -129,7 +163,72 @@ func LogoutUser(c *fiber.Ctx) error {
 		Expires:  time.Now().Add(-time.Hour),
 	})
 
+	c.Cookie(&fiber.Cookie{
+		Name:     "refresh_token",
+		Value:    "",
+		Path:     "/",
+		HTTPOnly: true,
+		Expires:  time.Now().Add(-time.Hour),
+	})
+
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"message": "Logout successful",
+	})
+}
+
+func RefreshAccessToken(c *fiber.Ctx) error {
+	refreshToken := c.Cookies("refresh_token")
+	if refreshToken == "" {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"error": "Missing refresh token",
+		})
+	}
+
+	token, err := jwt.Parse(refreshToken, func(t *jwt.Token) (interface{}, error) {
+		return []byte(middleware.GetJWTSecret()), nil
+	})
+	if err != nil || !token.Valid {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"error": "Invalid refresh token",
+		})
+	}
+
+	claims := token.Claims.(jwt.MapClaims)
+	email := claims["email"].(string)
+
+	// Cek apakah token masih valid di database
+	var stored model.RefreshToken
+	if err := database.DB.Where("token = ?", refreshToken).First(&stored).Error; err != nil {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"error": "Refresh token revoked or not found",
+		})
+	}
+
+	if time.Now().After(stored.Expiry) {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"error": "Refresh token expired",
+		})
+	}
+
+	// Generate access token baru
+	newAccessExp := time.Now().Add(1 * time.Hour)
+	newClaims := jwt.MapClaims{
+		"email": email,
+		"exp":   newAccessExp.Unix(),
+		"iss":   "FinalBeFe",
+	}
+	newAccessToken := jwt.NewWithClaims(jwt.SigningMethodHS256, newClaims)
+	newAccessTokenString, _ := newAccessToken.SignedString([]byte(middleware.GetJWTSecret()))
+
+	c.Cookie(&fiber.Cookie{
+		Name:     "token",
+		Value:    newAccessTokenString,
+		Path:     "/",
+		HTTPOnly: true,
+		Expires:  newAccessExp,
+	})
+
+	return c.JSON(fiber.Map{
+		"message": "Access token refreshed successfully",
 	})
 }

@@ -13,6 +13,9 @@ import Dashboard from "./pages/students/Dashboard";
 import Overview from "./pages/admin/Overview";
 import CoursesAdmin from "./pages/admin/Courses";
 import Users from "./pages/admin/Users";
+import ForgotPass from "./pages/publics/ForgotPass";
+import ResetPass from "./pages/publics/ResetPass";
+import SuccesResetPass from "./pages/publics/SuccesResetPass";
 
 export const CategoryContext = createContext();
 
@@ -30,6 +33,9 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/forgotPassword" element={<ForgotPass />} />
+        <Route path="/resetPassword" element={<ResetPass />} />
+        <Route path="/succesResetPassword" element={<SuccesResetPass />} />
 
         {/* Student Routes */}
         <Route path="/student/dashboard" element={<Dashboard />} />

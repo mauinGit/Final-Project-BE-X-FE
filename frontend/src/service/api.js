@@ -25,7 +25,7 @@ export const GetCourse = async () => {
 // Course Detail
 export const GetCourseById = async (id) => {
     try {
-        const res = await fetch("http://127.0.0.1:8080/api/courses/${id}");
+        const res = await fetch(`http://127.0.0.1:8080/api/courses/${id}`);
         if(!res.ok) throw new Error("Failed to fetch course");
 
         const data = await res.json();

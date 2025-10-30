@@ -41,13 +41,19 @@ export default function useAuth() {
     const handleLogin = async (email, password) => {
         try {
             const res = await loginUser(email, password);
-            const { token, user } = res;
+            // const { token, user } = res;
+            const { user } = res;
 
-            localStorage.setItem("token", token);
-            localStorage.setItem("role", user.role);
+            if(user) {
+                localStorage.setItem("role", user.role);
+                setUser(user);
+            }
 
-            setToken(token);
-            setUser(user);
+            // localStorage.setItem("token", token);
+            // localStorage.setItem("role", user.role);
+
+            // setToken(token);
+            // setUser(user);
 
             return { error: false, user };
         } catch (error) {

@@ -34,6 +34,7 @@ func DBMigrate(){
 		&model.User{}, 
 		&model.RefreshToken{},
 		&model.Contact{},
+		&model.PasswordResetToken{},
 	) 
 	
 	if err != nil {

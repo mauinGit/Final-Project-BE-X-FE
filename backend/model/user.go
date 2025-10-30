@@ -20,3 +20,10 @@ type RefreshToken struct {
 	Token  string
 	Expiry time.Time
 }
+
+type PasswordResetToken struct {
+    gorm.Model
+    Email string
+    Token string
+    ExpiresAt time.Time
+}

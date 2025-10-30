@@ -11,4 +11,6 @@ func routesUser(api fiber.Router) {
 	user.Post("/login", controllers.LoginUser)
 	user.Post("/logout", controllers.LogoutUser)
 	user.Post("/refresh", controllers.RefreshAccessToken)
+	user.Post("/forgot", controllers.ForgotPassword)
+	user.Post("/reset", controllers.ResetPassword)
 }

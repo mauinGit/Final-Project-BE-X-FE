@@ -8,6 +8,7 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v5"
+	"github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )
@@ -231,4 +232,77 @@ func RefreshAccessToken(c *fiber.Ctx) error {
 	return c.JSON(fiber.Map{
 		"message": "Access token refreshed successfully",
 	})
+}
+
+func ForgotPassword(c *fiber.Ctx) error {
+	email := c.FormValue("email")
+
+	var user model.User
+	if err := database.DB.Where("email = ?", email).First(&user).Error; err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"error": "Email not found",
+		})
+	}
+
+	token := uuid.New().String()
+	expires := time.Now().Add(15 * time.Minute)
+
+	reset := model.PasswordResetToken{
+		Email:     email,
+		Token:     token,
+		ExpiresAt: expires,
+	}
+
+	database.DB.Create(&reset)
+
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"message": "Reset token generated successfully",
+		"token":   token,
+	})
+}
+
+func ResetPassword(c *fiber.Ctx) error {
+    token := c.FormValue("token")
+    newPassword := c.FormValue("new_password")
+    confirmPassword := c.FormValue("confirm_password")
+
+    if newPassword != confirmPassword {
+        return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+            "error": "Password and confirm password do not match",
+        })
+    }
+
+    var reset model.PasswordResetToken
+    if err := database.DB.Where("token = ?", token).First(&reset).Error; err != nil {
+        return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+            "error": "Invalid or expired token",
+        })
+    }
+
+    if time.Now().After(reset.ExpiresAt) {
+        return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+            "error": "Token has expired",
+        })
+    }
+
+    hash, err := bcrypt.GenerateFromPassword([]byte(newPassword), bcrypt.DefaultCost)
+    if err != nil {
+        return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+            "error": "Failed to hash password",
+        })
+    }
+
+    if err := database.DB.Model(&model.User{}).
+        Where("email = ?", reset.Email).
+        Update("password", string(hash)).Error; err != nil {
+        return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+            "error": "Failed to update password",
+        })
+    }
+
+    database.DB.Delete(&reset)
+
+    return c.Status(fiber.StatusOK).JSON(fiber.Map{
+        "message": "Password has been reset successfully",
+    })
 }

@@ -7,10 +7,8 @@ import (
 
 func AdminOnly() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		// Ambil token dari Cookie dulu
 		tokenString := c.Cookies("token")
 
-		// Jika tidak ada, cek Authorization Header
 		if tokenString == "" {
 			authHeader := c.Get("Authorization")
 			if len(authHeader) > 7 && authHeader[:7] == "Bearer " {
@@ -36,7 +34,6 @@ func AdminOnly() fiber.Handler {
 
 		claims := token.Claims.(jwt.MapClaims)
 
-		// ✅ Check role disini
 		if claims["role"] != "admin" {
 			return c.Status(fiber.StatusForbidden).JSON(fiber.Map{
 				"error": "Forbidden - Admin Only",

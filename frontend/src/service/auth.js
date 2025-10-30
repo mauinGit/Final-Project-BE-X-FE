@@ -35,11 +35,10 @@ export const loginUser = async (email, password) => {
         });
 
         const data = await res.json();
+        console.log("Login response:", data);
 
         if (!res.ok) throw new Error(data.error || data.message || "Login failed");
-
         localStorage.setItem("token", data.token || "");
-
         return data;
     } catch (error) {
         console.error("Login error: ", error.message);

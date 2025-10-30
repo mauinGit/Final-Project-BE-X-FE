@@ -24,15 +24,32 @@ export default function useAuth() {
     };
 
     // Login
+    // const handleLogin = async (email, password) => {
+    //     try {
+    //         const data = await loginUser(email, password);
+    //         if(!data.error) {
+    //             localStorage.setItem("token", data.token || "");
+    //             setToken(data.token || "");
+    //             setUser(data.user || null);
+    //         }
+    //         return data;
+    //     } catch (error) {
+    //         console.error("Login error:", error.message);
+    //         return { error: true, message: error.message };
+    //     }
+    // };
     const handleLogin = async (email, password) => {
         try {
-            const data = await loginUser(email, password);
-            if(!data.error) {
-                localStorage.setItem("token", data.token || "");
-                setToken(data.token || "");
-                setUser(data.user || null);
-            }
-            return data;
+            const res = await loginUser(email, password);
+            const { token, user } = res;
+
+            localStorage.setItem("token", token);
+            localStorage.setItem("role", user.role);
+
+            setToken(token);
+            setUser(user);
+
+            return { error: false, user };
         } catch (error) {
             console.error("Login error:", error.message);
             return { error: true, message: error.message };

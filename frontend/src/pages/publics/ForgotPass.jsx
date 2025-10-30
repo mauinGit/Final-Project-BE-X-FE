@@ -1,6 +1,25 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import { useState } from "react";
 
 export default function ForgotPass() {
+    const [email, setEmail] = useState("");
+    const { forgotPassword } = useAuth();
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const res = await forgotPassword(email);
+
+        if(!res.error) {
+            localStorage.setItem("reset_token", res.token);
+            navigate("/resetPassword");
+        } else {
+            alert(res.message);
+        }
+    };
+
     return(
         <section id="forgotPassword" className="font-Open Sans min-h-screen flex items-center justify-center relative overflow-hidden px-4 sm:px-6 lg:px-8 py-14">
             <img 
@@ -19,29 +38,31 @@ export default function ForgotPass() {
                     <h1 className="text-3xl sm:text-4xl text-heading font-bold">Forgot Password</h1>
                     <p className="text-xl text-gray-500 text-center">Enter the email address associated with your account!</p>
                 </div>
-                <form className="flex flex-col gap-6 sm:gap-8 items-center w-full">
+                <form onSubmit={handleSubmit} className="flex flex-col gap-6 sm:gap-8 items-center w-full">
                     <div className="flex flex-col gap-4 w-full">
                         <label htmlFor="email" className="text-xl font-medium text-heading">Email</label>
                         <input 
-                            type="text" 
+                            type="email" 
                             id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             placeholder="Enter your email address"
                             className="w-full rounded-full px-5 py-3 text-xl text-gray-500 bg-secondaryBlue focus:outline-none focus:ring-2 focus:ring-black"
                         />
                     </div>
                     <div className="flex flex-row gap-4 w-full items-center">
-                        <button
-                            type="button"
-                            className="bg-white text-heading text-xl border-2 border-black rounded-full px-5 py-3 w-full hover:scale-[1.02] transition-transform cursor-pointer"
+                        <NavLink
+                            to="/login"
+                            className="bg-white text-heading text-center text-xl border-2 border-black rounded-full px-5 py-3 w-full hover:scale-[1.02] transition-transform cursor-pointer"
                         >
                             Cancel
-                        </button>
-                        <NavLink
-                            to="/resetPassword"
+                        </NavLink>
+                        <button
+                            type="submit"
                             className="bg-blue text-white text-center text-xl border-2 border-black rounded-full px-5 py-3 w-full hover:scale-[1.02] transition-transform cursor-pointer"
                         >
                             Verification
-                        </NavLink>
+                        </button>
                     </div>
                 </form>
             </div>

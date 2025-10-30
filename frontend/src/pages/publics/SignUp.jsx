@@ -1,6 +1,40 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import { useState } from "react";
 
 export default function SignUp() {
+    const { register } = useAuth();
+    const navigate = useNavigate();
+    const [form, setForm] = useState({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+    });
+    const [error, setError] = useState("");
+
+    const handleChange = (e) => {
+        setForm({ ...form, [e.target.id]: e.target.value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError("");
+
+        const res = await register(
+            form.name,
+            form.email,
+            form.password,
+            form.confirmPassword
+        );
+
+        if(res.error){
+            setError(res.message);
+        } else {
+            navigate("/login");
+        }
+    };
+
     return(
         <section id="signUp" className="font-Open Sans min-h-screen flex items-center justify-center relative overflow-hidden px-4 sm:px-6 lg:px-8 py-14">
             <img 
@@ -19,22 +53,24 @@ export default function SignUp() {
                     <h1 className="text-3xl sm:text-4xl text-heading font-bold">Create Your Account</h1>
                     <p className="text-xl text-gray-500 text-center">Welcome! Please enter your details</p>
                 </div>
-                <form className="flex flex-col gap-6 sm:gap-8 items-center w-full">
+                <form onSubmit={handleSubmit} className="flex flex-col gap-6 sm:gap-8 items-center w-full">
                     <div className="flex flex-col gap-4 w-full">
                         <label htmlFor="name" className="text-xl font-medium text-heading">Name</label>
                         <input 
                             type="text" 
                             id="name"
                             placeholder="Enter your full name"
+                            onChange={handleChange}
                             className="w-full rounded-full px-5 py-3 text-xl text-gray-500 bg-secondaryBlue focus:outline-none focus:ring-2 focus:ring-black"
                         />
                     </div>
                     <div className="flex flex-col gap-4 w-full">
                         <label htmlFor="email" className="text-xl font-medium text-heading">Email</label>
                         <input 
-                            type="text" 
+                            type="email" 
                             id="email"
                             placeholder="Enter your email address"
+                            onChange={handleChange}
                             className="w-full rounded-full px-5 py-3 text-xl text-gray-500 bg-secondaryBlue focus:outline-none focus:ring-2 focus:ring-black"
                         />
                     </div>
@@ -43,11 +79,25 @@ export default function SignUp() {
                         <input 
                             type="password" 
                             id="password"
+                            value={form.password}
+                            onChange={handleChange}
                             placeholder="Enter your password"
                             className="w-full rounded-full px-5 py-3 text-xl text-gray-500 bg-secondaryBlue focus:outline-none focus:ring-2 focus:ring-black"
                         />
                     </div>
+                    <div className="flex flex-col gap-4 w-full">
+                        <label htmlFor="password" className="text-xl font-medium text-heading">Confirm Password</label>
+                        <input 
+                            type="password" 
+                            id="confirmPassword"
+                            value={form.confirmPassword}
+                            onChange={handleChange}
+                            placeholder="Confirm your password"
+                            className="w-full rounded-full px-5 py-3 text-xl text-gray-500 bg-secondaryBlue focus:outline-none focus:ring-2 focus:ring-black"
+                        />
+                    </div>
                      <button
+                        type="submit"
                         className="bg-blue text-white text-xl border-2 border-black rounded-full px-5 py-3 mt-5 w-full hover:scale-[1.02] transition-transform cursor-pointer"
                     >
                         Sign Up

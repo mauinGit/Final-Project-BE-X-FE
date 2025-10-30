@@ -1,6 +1,27 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import { useState } from "react";
 
 export default function ResetPass() {
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const { resetPassword } = useAuth();
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const token = localStorage.getItem("reset_token");
+        const res = await resetPassword(token, password, confirmPassword);
+
+        if(!res.error) {
+            localStorage.removeItem("reset_token");
+            navigate("/succesResetPassword");
+        } else {
+            alert(res.message);
+        }
+    };
+
     return(
         <section id="resetPassword" className="font-Open Sans min-h-screen flex items-center justify-center relative overflow-hidden px-4 sm:px-6 lg:px-8 py-14">
             <img 
@@ -19,31 +40,35 @@ export default function ResetPass() {
                     <h1 className="text-3xl sm:text-4xl text-heading font-bold">Reset Password</h1>
                     <p className="text-xl text-gray-500 text-center">Create your new password, according to the terms and conditions!</p>
                 </div>
-                <form className="flex flex-col gap-6 sm:gap-8 items-center w-full">
+                <form onSubmit={handleSubmit} className="flex flex-col gap-6 sm:gap-8 items-center w-full">
                     <div className="flex flex-col gap-4 w-full">
                         <label htmlFor="password" className="text-xl font-medium text-heading">New Password</label>
                         <input 
                             type="password" 
                             id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             placeholder="Enter your new password"
                             className="w-full rounded-full px-5 py-3 text-xl text-gray-500 bg-secondaryBlue focus:outline-none focus:ring-2 focus:ring-black"
                         />
                     </div>
                     <div className="flex flex-col gap-4 w-full">
-                        <label htmlFor="password" className="text-xl font-medium text-heading">Confirm Password</label>
+                        <label htmlFor="confirmPassword" className="text-xl font-medium text-heading">Confirm Password</label>
                         <input 
-                            type="password" 
+                            type="confirmPassword" 
                             id="password"
+                            value={password}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
                             placeholder="Confirm password"
                             className="w-full rounded-full px-5 py-3 text-xl text-gray-500 bg-secondaryBlue focus:outline-none focus:ring-2 focus:ring-black"
                         />
                     </div>
-                    <NavLink
-                        to="/succesResetPassword"
+                    <button
+                        type="submit"
                         className="bg-blue text-white text-center text-xl border-2 border-black rounded-full px-5 py-3 w-full hover:scale-[1.02] transition-transform cursor-pointer"
                     >
                         Reset Password
-                    </NavLink>
+                    </button>
                 </form>
             </div>
             <div className="circlePosition w-[260px] h-[200px] bg-blue rounded-full absolute z-1 top-[80%] left-[10%] -translate-x-1/2 -translate-y-1/2 blur-[200px]"></div>

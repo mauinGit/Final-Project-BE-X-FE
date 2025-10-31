@@ -26,25 +26,12 @@ export default function Login() {
             return;
         }
 
-        if (res.user) {
-            const user = res.user;
-            if(user.role === "admin") navigate("/admin/overview");
-            else if(user.role === "student") navigate("/student/dashboard");
+        if (res.user && res.user.role) {
+            if(res.user.role === "admin") navigate("/admin/overview");
+            else if(res.user.role === "student") navigate("/student/dashboard");
         } else {
             setError("Login failed, try again...");
         }
-        // const { token, user } = res.data;
-
-        // localStorage.setItem("token", token);
-        // localStorage.setItem("role", user.role);
-
-        // if(user.role === "admin") {
-        //     navigate("/admin/overview");
-        // } else if (user.role === "student") {
-        //     navigate("/student/dashboard");
-        // } else {
-        //     navigate("/");
-        // }
     };
 
     return(

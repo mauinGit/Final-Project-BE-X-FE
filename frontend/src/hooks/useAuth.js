@@ -24,38 +24,23 @@ export default function useAuth() {
     };
 
     // Login
-    // const handleLogin = async (email, password) => {
-    //     try {
-    //         const data = await loginUser(email, password);
-    //         if(!data.error) {
-    //             localStorage.setItem("token", data.token || "");
-    //             setToken(data.token || "");
-    //             setUser(data.user || null);
-    //         }
-    //         return data;
-    //     } catch (error) {
-    //         console.error("Login error:", error.message);
-    //         return { error: true, message: error.message };
-    //     }
-    // };
     const handleLogin = async (email, password) => {
         try {
-            const res = await loginUser(email, password);
-            // const { token, user } = res;
-            const { user } = res;
+            const data = await loginUser(email, password);
+            console.log("Login response:", data);
 
-            if(user) {
-                localStorage.setItem("role", user.role);
-                setUser(user);
+            if(data.error) {
+                return { error: true, message: data.message };
             }
 
-            // localStorage.setItem("token", token);
-            // localStorage.setItem("role", user.role);
+            if(!data.user) {
+                return { error: true, message: "Invalid response from server" };
+            }
 
-            // setToken(token);
-            // setUser(user);
+            localStorage.setItem("user", JSON.stringify(data.user));
+            setUser(data.user);
 
-            return { error: false, user };
+            return { error: false, user: data.user };
         } catch (error) {
             console.error("Login error:", error.message);
             return { error: true, message: error.message };

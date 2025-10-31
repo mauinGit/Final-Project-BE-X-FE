@@ -4,6 +4,7 @@ import (
 	"finalBeFe/database"
 	"finalBeFe/middleware"
 	"finalBeFe/model"
+	"fmt"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -118,9 +119,12 @@ func LoginUser(c *fiber.Ctx) error {
 		Token:  refreshTokenString,
 		Expiry: refreshExp,
 	}
+
+	database.DB.Where("user_id = ?", user.ID).Delete(&model.RefreshToken{})
 	if err := database.DB.Create(&refreshData).Error; err != nil {
+		fmt.Println("Error save token:", err)
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"message": "Failed to save refresh token",
+			"message": err.Error(),
 		})
 	}
 
@@ -131,6 +135,7 @@ func LoginUser(c *fiber.Ctx) error {
 		HTTPOnly: true,
 		Expires:  accessExp,
 	})
+	
 	c.Cookie(&fiber.Cookie{
 		Name:     "refresh_token",
 		Value:    refreshTokenString,
@@ -263,47 +268,47 @@ func ForgotPassword(c *fiber.Ctx) error {
 }
 
 func ResetPassword(c *fiber.Ctx) error {
-    token := c.FormValue("token")
-    newPassword := c.FormValue("new_password")
-    confirmPassword := c.FormValue("confirm_password")
+	token := c.FormValue("token")
+	newPassword := c.FormValue("new_password")
+	confirmPassword := c.FormValue("confirm_password")
 
-    if newPassword != confirmPassword {
-        return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-            "error": "Password and confirm password do not match",
-        })
-    }
+	if newPassword != confirmPassword {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"error": "Password and confirm password do not match",
+		})
+	}
 
-    var reset model.PasswordResetToken
-    if err := database.DB.Where("token = ?", token).First(&reset).Error; err != nil {
-        return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-            "error": "Invalid or expired token",
-        })
-    }
+	var reset model.PasswordResetToken
+	if err := database.DB.Where("token = ?", token).First(&reset).Error; err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"error": "Invalid or expired token",
+		})
+	}
 
-    if time.Now().After(reset.ExpiresAt) {
-        return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-            "error": "Token has expired",
-        })
-    }
+	if time.Now().After(reset.ExpiresAt) {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"error": "Token has expired",
+		})
+	}
 
-    hash, err := bcrypt.GenerateFromPassword([]byte(newPassword), bcrypt.DefaultCost)
-    if err != nil {
-        return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-            "error": "Failed to hash password",
-        })
-    }
+	hash, err := bcrypt.GenerateFromPassword([]byte(newPassword), bcrypt.DefaultCost)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"error": "Failed to hash password",
+		})
+	}
 
-    if err := database.DB.Model(&model.User{}).
-        Where("email = ?", reset.Email).
-        Update("password", string(hash)).Error; err != nil {
-        return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-            "error": "Failed to update password",
-        })
-    }
+	if err := database.DB.Model(&model.User{}).
+		Where("email = ?", reset.Email).
+		Update("password", string(hash)).Error; err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"error": "Failed to update password",
+		})
+	}
 
-    database.DB.Delete(&reset)
+	database.DB.Delete(&reset)
 
-    return c.Status(fiber.StatusOK).JSON(fiber.Map{
-        "message": "Password has been reset successfully",
-    })
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"message": "Password has been reset successfully",
+	})
 }

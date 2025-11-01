@@ -12,7 +12,7 @@ import MyCourses from "./pages/students/MyCourses";
 import Dashboard from "./pages/students/Dashboard";
 import Overview from "./pages/admin/Overview";
 import CoursesAdmin from "./pages/admin/Courses";
-import Users from "./pages/admin/Users";
+import ContactAdmin from "./pages/admin/Contact";
 import ForgotPass from "./pages/publics/ForgotPass";
 import ResetPass from "./pages/publics/ResetPass";
 import SuccesResetPass from "./pages/publics/SuccesResetPass";
@@ -48,7 +48,7 @@ function App() {
         {/* Admin Routes */}
         <Route path="/admin/overview" element={<Overview />} />
         <Route path="/admin/courses" element={<CoursesAdmin />} />
-        <Route path="/admin/users" element={<Users />} />
+        <Route path="/admin/contactAdmin" element={<ContactAdmin />} />
         <Route path="/admin/addCourse" element={<AddCourse />} />
         <Route path="/admin/editCourse" element={<EditCourse />} />
 

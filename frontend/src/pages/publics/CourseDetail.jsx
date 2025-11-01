@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { GetCourseById } from "../../service/api";
+import { GetCourseById } from "../../service/course";
 import { useParams } from "react-router-dom";
 import CourseComment from "../../components/courses/CourseComment";
 

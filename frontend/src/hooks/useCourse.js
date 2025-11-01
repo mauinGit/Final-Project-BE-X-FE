@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { GetCourse, GetCourseById, UpdateCourse } from "../service/api";
+import { GetCourse, GetCourseById, CreateCourse, UpdateCourse } from "../service/course";
 
 export default function useCourse(id = null) {
     const [courses, setCourses] = useState(id ? null : []);
@@ -18,6 +18,16 @@ export default function useCourse(id = null) {
         fetchCourses();
     }, [id]);
 
+    // Create course
+    const createCourse = async (form) => {
+        try {
+            const result = await CreateCourse(form);
+            return result;
+        } catch (error) {
+            setError(error)
+        }
+    };
+
     // Update course by id
     const updateCourse = async (form) => {
         if(!id) return;
@@ -31,5 +41,5 @@ export default function useCourse(id = null) {
         }
     };
 
-    return{ data:courses, updateCourse, error };
+    return{ data:courses, createCourse, updateCourse, error };
 };

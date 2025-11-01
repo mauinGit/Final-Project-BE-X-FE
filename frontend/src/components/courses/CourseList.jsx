@@ -1,5 +1,5 @@
 import CourseCard from "./CourseCard";
-import { GetCourse } from "../../service/api";
+import { GetCourse } from "../../service/course";
 import { useEffect, useState } from "react";
 
 // const dummyCourses = [

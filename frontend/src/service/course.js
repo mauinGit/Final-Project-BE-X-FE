@@ -49,6 +49,31 @@ export const GetCourseById = async (id) => {
     }
 };
 
+// Create Course
+export const CreateCourse = async (form) => {
+    try {
+        const formData = new FormData();
+        formData.append("title", form.title);
+        formData.append("videoUrl", form.videoUrl);
+        formData.append("category", form.category);
+        formData.append("description", form.description);
+        if(form.cover) formData.append("cover", form.cover);
+
+        const res = await fetch(`${API_URL}/api/courses`, {
+            method: "POST",
+            body: formData,
+        });
+
+        if(!res.ok) throw new Error("Failed to create course");
+
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        console.error("Error creating course:", error);
+        throw error;        
+    }
+};
+
 // Update Course
 export const UpdateCourse = async (id, form) => {
     try {

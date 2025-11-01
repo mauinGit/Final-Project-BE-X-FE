@@ -2,7 +2,7 @@ import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { RxDashboard } from "react-icons/rx";
 import { GoBook } from "react-icons/go";
-import { PiUser } from "react-icons/pi";
+import { TbMessageUp } from "react-icons/tb";
 import { IoLogOutOutline } from "react-icons/io5";
 import { HiMenuAlt3 } from "react-icons/hi";
 
@@ -19,7 +19,7 @@ export default function SideBarAdmin() {
     const navItems = [
         { name: "Overview", path: "/admin/overview", icon: <RxDashboard size={24} /> },
         { name: "Courses", path: "/admin/courses", icon: <GoBook size={24} /> },
-        { name: "Users", path: "/admin/users", icon: <PiUser size={24} /> },
+        { name: "Contact", path: "/admin/contactAdmin", icon: <TbMessageUp size={28} style={{ strokeWidth: 1.5 }} /> },
     ];
 
     return(

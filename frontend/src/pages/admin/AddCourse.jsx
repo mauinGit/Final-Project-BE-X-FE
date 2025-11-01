@@ -1,18 +1,52 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import { CategoryContext } from "../../App";
 import SideBarAdmin from "../../components/admin/SidebarAdmin";
 import TopbarAdmin from "../../components/admin/TopbarAdmin";
 import DropDownLong from "../../components/admin/DropDownLong";
+import useCourse from "../../hooks/useCourse";
 
 export default function AddCourse() {
+    const navigate = useNavigate();
+    const { createCourse } = useCourse();
     const [fileName, setFileName] = useState("No file chosen");
     const { selectedCategory, setSelectedCategory } = useContext(CategoryContext);
+    const [form, setForm] = useState({
+        title: "",
+        videoUrl: "",
+        category: "",
+        description: "",
+        cover: null,
+    });
+
+    const handleChange = (e) => {
+        setForm({
+            ...form,
+            [e.target.id]: e.target.value,
+        });
+    };
 
     const handleFileChange = (e) => {
-        const file = e.target.file[0];
-        if(file) setFileName(file.name);
-        else setFileName("No file chosen")
+        const file = e.target.files[0];
+        if (file) {
+            setFileName(file.name);
+            setForm({ ...form, cover: file });
+        } else {
+            setFileName("No file chosen");
+        }
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await createCourse({
+                ...form,
+                category: selectedCategory,
+            });
+            navigate("/admin/courses");
+        } catch (error) {
+            console.error("Failed to add course:", error);
+        }
     };
 
     return(
@@ -31,14 +65,14 @@ export default function AddCourse() {
                             <h1 className="text-3xl sm:text-4xl text-heading font-bold">Add Course</h1>
                             <p className="text-xl text-gray-500 text-center">Add course information, category, and cover to complete setup</p>
                         </div>
-                        <form onSubmit="" className="flex flex-col gap-6 sm:gap-8 items-center w-full">
+                        <form onSubmit={handleSubmit} className="flex flex-col gap-6 sm:gap-8 items-center w-full">
                             <div className="flex flex-col gap-3 w-full">
                                 <label htmlFor="title" className="text-xl font-medium text-heading">Title</label>
                                     <input 
                                         type="text" 
                                         id="title"
-                                        // value={form.email}
-                                        // onChange={handleChange}
+                                        value={form.title}
+                                        onChange={handleChange}
                                         placeholder="Enter your title course"
                                         className="w-full rounded-full px-5 py-3 text-xl text-gray-500 bg-secondaryBlue focus:outline-none focus:ring-2 focus:ring-black"
                                     />
@@ -48,8 +82,8 @@ export default function AddCourse() {
                                     <input 
                                         type="url" 
                                         id="videoUrl"
-                                        // value={form.email}
-                                        // onChange={handleChange}
+                                        value={form.videoUrl}
+                                        onChange={handleChange}
                                         placeholder="Enter your video url"
                                         className="w-full rounded-full px-5 py-3 text-xl text-gray-500 bg-secondaryBlue focus:outline-none focus:ring-2 focus:ring-black"
                                     />
@@ -82,8 +116,8 @@ export default function AddCourse() {
                                     <textarea 
                                         rows="5"
                                         id="description"
-                                        // value={form.email}
-                                        // onChange={handleChange}
+                                        value={form.description}
+                                        onChange={handleChange}
                                         placeholder="Enter course description"
                                         className="w-full rounded-3xl px-5 py-3 text-xl text-gray-500 bg-secondaryBlue focus:outline-none focus:ring-2 focus:ring-black"
                                     />

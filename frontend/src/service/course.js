@@ -3,7 +3,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 // Course
 export const GetCourse = async () => {
     try {
-        const res = await fetch(`${API_URL}/api/courses`);
+        const res = await fetch(`${API_URL}/courses`);
         if(!res.ok) throw new Error("Failed to fetch course");
 
         const data = await res.json();
@@ -27,7 +27,7 @@ export const GetCourse = async () => {
 // Course Detail
 export const GetCourseById = async (id) => {
     try {
-        const res = await fetch(`${API_URL}/api/courses/${id}`);
+        const res = await fetch(`${API_URL}/courses/${id}`);
         if(!res.ok) throw new Error("Failed to fetch course");
 
         const data = await res.json();
@@ -59,7 +59,7 @@ export const CreateCourse = async (form) => {
         formData.append("description", form.description);
         if(form.cover) formData.append("cover", form.cover);
 
-        const res = await fetch(`${API_URL}/api/courses`, {
+        const res = await fetch(`${API_URL}/courses`, {
             method: "POST",
             body: formData,
         });
@@ -84,7 +84,7 @@ export const UpdateCourse = async (id, form) => {
         formData.append("description", form.description);
         if(form.cover) formData.append("cover", form.cover);
 
-        const res = await fetch(`${API_URL}/api/courses/${id}`, {
+        const res = await fetch(`${API_URL}/courses/${id}`, {
             method: "PUT",
             body: formData,
         });
@@ -96,5 +96,21 @@ export const UpdateCourse = async (id, form) => {
     } catch (error) {
         console.error("Error updating course:", error);
         throw error;
+    }
+};
+
+// Delete Course
+export const DeleteCourse = async (id) => {
+    try {
+        const res = await fetch(`${API_URL}/courses/${id}`, {
+            method: "DELETE",
+        });
+
+        if(!res.ok) throw new Error("Failed to delete course");
+
+        return await res.json();
+    } catch (error) {
+        console.error("Error deleting course:", error);
+        throw error
     }
 };

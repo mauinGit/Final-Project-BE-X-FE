@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import { CategoryContext } from "../../App";
+import toast from "react-hot-toast";
 import SideBarAdmin from "../../components/admin/SidebarAdmin";
 import TopbarAdmin from "../../components/admin/TopbarAdmin";
 import DropDownLong from "../../components/admin/DropDownLong";
@@ -43,9 +44,11 @@ export default function AddCourse() {
                 ...form,
                 category: selectedCategory,
             });
+            toast.success("Course added successfully!");
             navigate("/admin/courses");
         } catch (error) {
             console.error("Failed to add course:", error);
+            toast.error("Failed to add course.");
         }
     };
 

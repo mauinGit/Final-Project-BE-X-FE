@@ -1,6 +1,7 @@
 import { NavLink, useParams } from "react-router-dom";
 import { useState, useContext, useEffect } from "react";
 import { CategoryContext } from "../../App";
+import toast from "react-hot-toast";
 import SideBarAdmin from "../../components/admin/SidebarAdmin";
 import TopbarAdmin from "../../components/admin/TopbarAdmin";
 import DropDownLong from "../../components/admin/DropDownLong";
@@ -42,8 +43,10 @@ export default function EditCourse() {
         e.preventDefault();
         try {
             await updateCourse(form);
+            toast.success("Course update successfully!")
         } catch (error) {
             console.error("Failed to update:", error);
+            toast.error("Failed to update course")
         }
     };
 
@@ -78,7 +81,7 @@ export default function EditCourse() {
                         />
                         <div className="flex flex-col gap-5 items-center">
                             <h1 className="text-3xl sm:text-4xl text-heading font-bold">Edit Course</h1>
-                            <p className="text-xl text-gray-500 text-center">Add course information, category, and cover to complete setup</p>
+                            <p className="text-xl text-gray-500 text-center">Update course information, category, and cover to keep it up to date</p>
                         </div>
                         <form onSubmit={handleSubmit} className="flex flex-col gap-6 sm:gap-8 items-center w-full">
                             <div className="flex flex-col gap-3 w-full">

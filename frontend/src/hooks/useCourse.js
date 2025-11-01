@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { GetCourse, GetCourseById, CreateCourse, UpdateCourse } from "../service/course";
+import { GetCourse, GetCourseById, CreateCourse, UpdateCourse, DeleteCourse } from "../service/course";
 
 export default function useCourse(id = null) {
     const [courses, setCourses] = useState(id ? null : []);
@@ -41,5 +41,16 @@ export default function useCourse(id = null) {
         }
     };
 
-    return{ data:courses, createCourse, updateCourse, error };
+    // Delete course by id
+    const deleteCourse = async (id) => {
+        try {
+            await DeleteCourse(id);
+            setCourses((prev) => prev.filter((course) => course.id !== id));
+        } catch (error) {
+            setError(error);
+            throw error
+        }
+    }
+
+    return{ data:courses, createCourse, updateCourse, deleteCourse, error };
 };

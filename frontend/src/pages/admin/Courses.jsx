@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import SideBarAdmin from "../../components/admin/SidebarAdmin";
 import TableCourse from "../../components/admin/TableCourse";
 import TopbarAdmin from "../../components/admin/TopbarAdmin";
@@ -14,9 +15,14 @@ export default function Courses() {
                             <h1 className="text-heading text-2xl sm:text-3xl lg:text-4xl font-semibold">All Course</h1>
                             <div className="flex flex-row gap-8 items-center">
                                 {/* untuk add new course & show total course */}
+                                <NavLink
+                                    to="/admin/addCourse"
+                                    className="w-full px-6 py-2 rounded-full text-xl text-white border-2 border-black bg-blue hover:scale-[1.02] transition-transform cursor-pointer"
+                                >
+                                   + Add new course
+                                </NavLink>
                             </div>
                         </div>
-                        {/* component tabel kumpulan data course */}
                         <div className="px-4 sm:px-6 lg:px-10">
                             <TableCourse />
                         </div>

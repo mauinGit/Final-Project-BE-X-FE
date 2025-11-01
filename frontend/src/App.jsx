@@ -16,6 +16,9 @@ import Users from "./pages/admin/Users";
 import ForgotPass from "./pages/publics/ForgotPass";
 import ResetPass from "./pages/publics/ResetPass";
 import SuccesResetPass from "./pages/publics/SuccesResetPass";
+import AddCourse from "./pages/admin/AddCourse";
+import EditCourse from "./pages/admin/EditCourse";
+
 
 export const CategoryContext = createContext();
 
@@ -46,6 +49,8 @@ function App() {
         <Route path="/admin/overview" element={<Overview />} />
         <Route path="/admin/courses" element={<CoursesAdmin />} />
         <Route path="/admin/users" element={<Users />} />
+        <Route path="/admin/addCourse" element={<AddCourse />} />
+        <Route path="/admin/editCourse" element={<EditCourse />} />
 
       </Routes>
     </CategoryContext.Provider>

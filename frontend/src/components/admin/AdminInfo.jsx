@@ -4,16 +4,14 @@ export default function AdminInfo() {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        // GetUserAdmin().then(setUser); //sementara
-        setUser({
-            name: "Admin GDCourse",
-            email: "adminGDCourse@gmail.com",
-            profile: ""
-        });
+        const storedUser = localStorage.getItem("user");
+        if(storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
     }, []);
 
     if(!user) {
-        return <div className="text-gray-500 items-center text-xl">Loading...</div>
+        return <div className="text-gray-500 items-center text-xl">Loading</div>
     }
 
     // Inisial nama user

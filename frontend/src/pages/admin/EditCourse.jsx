@@ -68,9 +68,11 @@ export default function EditCourse() {
     };
 
     return(
-        <section id="addCourse" className="font-Open Sans bg-secondBlue relative w-full flex">
-            <SideBarAdmin />
-            <div className="flex flex-col flex-1 min-h-screen">
+        <section id="addCourse" className="font-Open Sans bg-secondBlue relative w-full flex min-h-screen overflow-hidden">
+            <div className="h-auto">
+                <SideBarAdmin />
+            </div>
+            <div className="flex flex-col flex-1 overflow-y-auto max-h-screen">
                 <TopbarAdmin />
                 <div className="flex-1 flex items-center justify-center">
                     <div className="flex flex-col w-full relative max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl rounded-3xl sm:rounded-4xl p-6 sm:p-8 md:p-10 border-2 border-black bg-white items-center gap-10 z-10 px-4 sm:px-6 lg:px-10 mb-5">

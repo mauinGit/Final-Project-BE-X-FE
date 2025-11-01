@@ -5,14 +5,16 @@ import { GoBook } from "react-icons/go";
 import { BsCollection } from "react-icons/bs";
 import { IoLogOutOutline } from "react-icons/io5";
 import { HiMenuAlt3 } from "react-icons/hi";
+import useAuth from "../../hooks/useAuth";
 
 export default function SideBarStudent() {
     const [open, setOpen] = useState(true);
     const [mobileOpen, setMobileOpen] = useState(false);
     const navigate = useNavigate();
+    const { logout } = useAuth();
 
-    const handleLogout = () => {
-        localStorage.removeItem("token");
+    const handleLogout = async () => {
+        await logout()
         navigate("/login");
     };
 

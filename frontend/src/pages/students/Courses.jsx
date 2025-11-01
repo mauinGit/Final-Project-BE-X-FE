@@ -9,9 +9,11 @@ export default function Courses() {
     const { selectedCategory, setSelectedCategory } = useContext(CategoryContext);
 
     return(
-        <section id="coursesStudent" className="font-Open Sans bg-secondBlue relative w-full flex">
-            <SideBarStudent />
-            <div className="flex flex-col flex-1 min-h-screen">
+        <section id="coursesStudent" className="font-Open Sans bg-secondBlue relative w-full flex min-h-screen overflow-hidden">
+            <div className="h-auto">
+                <SideBarStudent />
+            </div>
+            <div className="flex flex-col flex-1 overflow-y-auto max-h-screen">
                 <TopBar />
                 <div className="flex-1">
                     <div className="flex flex-col px-4 sm:px-6 lg:px-10 mb-5 gap-6">

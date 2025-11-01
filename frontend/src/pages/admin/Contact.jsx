@@ -4,9 +4,11 @@ import TopbarAdmin from "../../components/admin/TopbarAdmin";
 
 export default function Contact() {
     return(
-        <section id="dataContact" className="font-Open Sans bg-secondBlue relative w-full flex">
-            <SideBarAdmin />
-            <div className="flex flex-col flex-1 min-h-screen overflow-hidden">
+        <section id="dataContact" className="font-Open Sans bg-secondBlue relative w-full flex min-h-screen overflow-hidden">
+            <div className="h-auto">
+                <SideBarAdmin />
+            </div>
+            <div className="flex flex-col flex-1 min-h-screen overflow-hidden overflow-y-auto max-h-screen">
                 <TopbarAdmin />
                 <div className="flex-1 overflow-auto">
                     <div className="flex flex-col mb-5 gap-6 min-w-0">

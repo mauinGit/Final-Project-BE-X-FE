@@ -9,9 +9,11 @@ export default function Dashboard() {
     const { selectedCategory, setSelectedCategory } = useContext(CategoryContext);
 
     return(
-        <section id="dashboard" className="font-Open Sans bg-secondBlue relative w-full flex">
-            <SideBarStudent />
-            <div className="flex flex-col flex-1 min-h-screen">
+        <section id="dashboard" className="font-Open Sans bg-secondBlue relative w-full flex min-h-screen overflow-hidden">
+            <div className="h-auto">
+                <SideBarStudent />
+            </div>
+            <div className="flex flex-col flex-1 overflow-y-auto max-h-screen">
                 <TopBar />
                 <div className="flex-1">
                     <div className="px-4 lg:block hidden sm:px-6 lg:px-10 justify-center items-center mb-20">

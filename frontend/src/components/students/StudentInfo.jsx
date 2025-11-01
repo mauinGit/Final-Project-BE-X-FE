@@ -4,16 +4,14 @@ export default function StudentInfo() {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        // GetUserStudent().then(setUser); //sementara
-        setUser({
-            name: "Nabila Ayu Talita",
-            email: "nabilaayutalitaa@gmail.com",
-            profile: ""
-        });
+        const storedUser = localStorage.getItem("user");
+        if(storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
     }, []);
 
     if(!user) {
-        return <div className="text-gray-500 items-center text-xl">Loading...</div>
+        return <div className="text-gray-500 items-center text-xl">Loading</div>
     }
 
     // Inisial nama user

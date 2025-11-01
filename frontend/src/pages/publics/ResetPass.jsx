@@ -11,7 +11,16 @@ export default function ResetPass() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (password !== confirmPassword) {
+            alert("Passwords do not match!");
+            return;
+        }
+
         const token = localStorage.getItem("reset_token");
+        if(!token) {
+            return;
+        }
+        
         const res = await resetPassword(token, password, confirmPassword);
 
         if(!res.error) {
@@ -55,9 +64,9 @@ export default function ResetPass() {
                     <div className="flex flex-col gap-4 w-full">
                         <label htmlFor="confirmPassword" className="text-xl font-medium text-heading">Confirm Password</label>
                         <input 
-                            type="confirmPassword" 
-                            id="password"
-                            value={password}
+                            type="password" 
+                            id="confirmPassword"
+                            value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             placeholder="Confirm password"
                             className="w-full rounded-full px-5 py-3 text-xl text-gray-500 bg-secondaryBlue focus:outline-none focus:ring-2 focus:ring-black"

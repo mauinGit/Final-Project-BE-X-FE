@@ -16,18 +16,6 @@ export default function CourseDetail() {
 
         GetCourseById(id).then((data) => {
             setDetailCourse(data);
-
-            // const viewed = JSON.parse(localStorage.getItem("viewedCourses")) || [];
-            // const alreadyViewed = viewed.find(v => v.id === Number(id));
-
-            // if(!alreadyViewed) {
-            //     viewed.push({
-            //         id: data.id,
-            //         title: data.title,
-            //         category: data.category
-            //     });
-            //     localStorage.setItem("viewedCourses", JSON.stringify(viewed));
-            // }
         });
 
         // Mulai video course ketika komponent dirender

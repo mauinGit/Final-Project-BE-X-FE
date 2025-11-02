@@ -26,11 +26,18 @@ export default function Login() {
             return;
         }
 
+        // if (res.user && res.user.role) {
+        //     setTimeout(() => {
+        //         if(res.user.role === "admin") navigate("/admin/overview");
+        //         else if(res.user.role === "student") navigate("/student/dashboard");
+        //     }, 100);
+        // }
         if (res.user && res.user.role) {
-            setTimeout(() => {
-                if(res.user.role === "admin") navigate("/admin/overview");
-                else if(res.user.role === "student") navigate("/student/dashboard");
-            }, 100);
+            if (res.user.role === "admin") {
+                navigate("/admin/overview", { replace: true });
+            } else if (res.user.role === "student") {
+                navigate("/student/dashboard", { replace: true });
+            }
         }
     };
 

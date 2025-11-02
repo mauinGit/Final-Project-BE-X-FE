@@ -9,8 +9,8 @@ import {
 } from "../service/auth";
 
 export default function useAuth() {
-    const [user, setUser] = useState(null);
-    const [token, setToken] = useState(localStorage.getItem("token") || null);
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
+    const [isAuth, setIsAuth] = useState(!!user);
     
     // Register
     const handleRegister = async (name, email, password, confirmPassword) => {
@@ -37,12 +37,10 @@ export default function useAuth() {
                 return { error: true, message: "Invalid response from server" };
             }
 
-            localStorage.setItem("token", data.token);
             localStorage.setItem("user", JSON.stringify(data.user));
 
-
             setUser(data.user);
-            setToken(data.token);
+            setIsAuth(true);
 
             return { error: false, user: data.user };
         } catch (error) {
@@ -58,10 +56,9 @@ export default function useAuth() {
         } catch (error) {
             console.error("Logout error:", error.message);
         } finally {
-            localStorage.removeItem("token");
             localStorage.removeItem("user");
-            setToken(null);
             setUser(null);
+            setIsAuth(false);
         }
     };
 
@@ -69,13 +66,22 @@ export default function useAuth() {
     const handleRefresh = async () => {
         try {
             const data = await refreshToken();
-        if (!data.error && data.token) {
-            localStorage.setItem("token", data.token);
-            setToken(data.token);
-        }
-        return data;
+
+            if(!data.error){
+                setIsAuth(true);
+                return  { error: false };
+            }
+
+            // return data;
+            throw new Error("Refresh failed");
         } catch (error) {
             console.error("Refresh error:", error.message);
+
+            // Clear auth state
+            setIsAuth(false);
+            localStorage.removeItem("user");
+            setUser(null);
+
             return { error: true, message: error.message };
         }
     };
@@ -103,14 +109,18 @@ export default function useAuth() {
     };
 
     useEffect(() => {
-        if(token) {
+        if(!isAuth) return;
+
+        const interval = setInterval(() => {
             handleRefresh();
-        }
-    }, []);
+        }, 50 * 60 * 1000 );
+
+        return () => clearInterval(interval);
+    }, [isAuth]);
 
     return{
         user,
-        token, 
+        isAuth,
         register: handleRegister,
         login: handleLogin,
         logout: handleLogout,

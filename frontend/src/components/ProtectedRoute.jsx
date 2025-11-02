@@ -1,11 +1,11 @@
-import { Navigate } from "react-router-dom"
+import { Navigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 export default function ProtectedRoute({ children, allowedRole }) {
-    const token = localStorage.getItem("token");
-    const user = JSON.parse(localStorage.getItem("user"));
+    const { user, isAuth } = useAuth();
 
     // Belum login
-    if(!token || !user) {
+    if(!isAuth || !user) {
         return <Navigate to="/login" replace />
     }
 

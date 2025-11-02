@@ -1,6 +1,8 @@
 import CourseCard from "./CourseCard";
 import { GetCourse } from "../../service/course";
 import { useEffect, useState } from "react";
+import useUserCourse from "../../hooks/useUserCourse";
+import { progress } from "framer-motion";
 
 // const dummyCourses = [
 //     {
@@ -28,17 +30,26 @@ import { useEffect, useState } from "react";
 
 
 export default function CourseList({ selectedCategory }) {
-
     const [courses, setCourses] = useState([]);
+    const { myCourses } = useUserCourse();
 
     useEffect(() => {
         GetCourse().then(setCourses);
     }, []);
 
+    const courseWithProgress = courses.map((course) => {
+        const userCourse = myCourses.find((mc) => mc.courseId === course.id);
+        return {
+            ...course,
+            progress: userCourse?.progress || 0,
+            hasStarted: !!userCourse,
+        };
+    });
+
     const filteredCourses = 
         selectedCategory === "All"
-            ? courses
-            : courses.filter((course) => course.category === selectedCategory);
+            ? courseWithProgress
+            : courseWithProgress.filter((course) => course.category === selectedCategory);
 
     return (
         <div className="grid md:grid-cols-3 gap-8 mt-5">

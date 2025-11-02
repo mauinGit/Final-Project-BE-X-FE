@@ -25,8 +25,8 @@ export const StartCourse = async (courseId) => {
 export const UpdateProgress = async (courseId, currentTime, duration) => {
     try {
         const formData = new FormData();
-        formData.append("current_time", currentTime);
-        formData.append("duration", duration);
+        formData.append("current_time", currentTime.toString());
+        formData.append("duration", duration.toString());
 
         const res = await fetch(`${API_URL}/userscourses/progress/${courseId}`, {
             method: "PUT",

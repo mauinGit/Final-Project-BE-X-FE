@@ -14,12 +14,30 @@ func CreateCourse(c *fiber.Ctx) error {
 	var course model.Course
 
 	title := c.FormValue("title")
+	if title == "" {
+		return c.Status(400).JSON(fiber.Map{
+			"error": "title must required",
+		})
+	}
+
 	description := c.FormValue("description")
+	if description == "" {
+		return c.Status(400).JSON(fiber.Map{
+			"error": "description must required",
+		})
+	}
+
+	overview := c.FormValue("overview")
+	if overview == "" {
+		return c.Status(400).JSON(fiber.Map{
+			"error": "overview must required",
+		})
+	}
 
 	cover, err := utils.SaveFile(c, "cover", true)
 	if err != nil {
 		return c.Status(400).JSON(fiber.Map{
-			"error": err.Error(), // biar tahu error detail-nya
+			"error": err.Error(),
 		})
 	}
 
@@ -49,6 +67,7 @@ func CreateCourse(c *fiber.Ctx) error {
 
 	course.Title = title
 	course.Description = description
+	course.Overview = overview
 	course.Cover = cover
 	course.VideoURL = video
 	course.CategoryID = uint(categoryID)
@@ -65,28 +84,40 @@ func CreateCourse(c *fiber.Ctx) error {
 }
 
 func GetCourse(c *fiber.Ctx) error {
-    var courses []model.Course
+	var courses []model.Course
 
-    limit := c.Query("limit")
-    query := database.DB.Model(&model.Course{}).
-        Preload("Category").
-        Where("posted_at <= ?", time.Now()).
-        Order("posted_at DESC")
+	limit := c.Query("limit")
+	query := database.DB.Model(&model.Course{}).
+		Preload("Category").
+		Where("posted_at <= ?", time.Now()).
+		Order("posted_at DESC")
 
-    if limit != "" {
-        if limitInt, err := strconv.Atoi(limit); err == nil {
-            query = query.Limit(limitInt)
-        }
-    }
+	if limit != "" {
+		if limitInt, err := strconv.Atoi(limit); err == nil {
+			query = query.Limit(limitInt)
+		}
+	}
 
-    if err := query.Find(&courses).Error; err != nil {
-        return c.Status(500).JSON(fiber.Map{
-            "error": "gagal mengambil course",
-        })
-    }
+	if err := query.Find(&courses).Error; err != nil {
+		return c.Status(500).JSON(fiber.Map{
+			"error": "gagal mengambil course",
+		})
+	}
 
-    return c.Status(200).JSON(fiber.Map{ 
-		"course": courses, 
+	var response []model.CourseListResponse
+	for _, course := range courses {
+		response = append(response, model.CourseListResponse{
+			ID:          course.ID,
+			Title:       course.Title,
+			Description: course.Description,
+			Cover:       course.Cover,
+			PostedAt:    course.PostedAt,
+			Category:    course.Category.Name,
+		})
+	}
+
+	return c.Status(200).JSON(fiber.Map{
+		"courses": response,
 	})
 }
 
@@ -100,11 +131,10 @@ func GetCourseByID(c *fiber.Ctx) error {
 		})
 	}
 
-	return c.Status(200).JSON(fiber.Map{ 
-		"course": courses, 
+	return c.Status(200).JSON(fiber.Map{
+		"course": courses,
 	})
 }
-
 
 func UpdateCourse(c *fiber.Ctx) error {
 	id := c.Params("id")
@@ -118,14 +148,21 @@ func UpdateCourse(c *fiber.Ctx) error {
 
 	title := c.FormValue("title")
 	description := c.FormValue("description")
+	overview := c.FormValue("overview")
 	categoryID := c.FormValue("category_id")
 
 	if title != "" {
 		course.Title = title
 	}
+
 	if description != "" {
 		course.Description = description
 	}
+
+	if overview != "" {
+		course.Overview = overview
+	}
+
 	if categoryID != "" {
 		if idInt, err := strconv.Atoi(categoryID); err == nil {
 			course.CategoryID = uint(idInt)
@@ -178,5 +215,3 @@ func DeleteCourse(c *fiber.Ctx) error {
 		"message": "course berhasil dihapus",
 	})
 }
-
-

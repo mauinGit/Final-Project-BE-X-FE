@@ -87,6 +87,7 @@ func LoginUser(c *fiber.Ctx) error {
 
 	accessExp := time.Now().Add(1 * time.Hour)
 	accessClaims := jwt.MapClaims{
+		"id":    user.ID,
 		"email": user.Email,
 		"name":  user.Name,
 		"role":  user.Role,

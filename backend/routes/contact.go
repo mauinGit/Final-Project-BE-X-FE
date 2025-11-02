@@ -9,4 +9,5 @@ import (
 func routesContact(api fiber.Router){
 	contact := api.Group("/contact")
 	contact.Post("/message", controllers.SendMessage)
+	contact.Get("/", controllers.GetMessage)
 }

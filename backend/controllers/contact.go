@@ -67,3 +67,17 @@ func SendMessage(c *fiber.Ctx) error {
         "contact": contact,
     })
 }
+
+func GetMessage(c *fiber.Ctx) error {
+    var messages []model.Contact
+
+    if err := database.DB.Find(&messages).Error; err != nil {
+        return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+            "error": "Failed to retrieve messages",
+        })
+    }
+
+    return c.Status(fiber.StatusOK).JSON(fiber.Map{
+        "messages": messages,
+    })
+}

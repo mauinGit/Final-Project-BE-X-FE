@@ -1,10 +1,11 @@
 import { Navigate } from "react-router-dom"
 
 export default function ProtectedRoute({ children, allowedRole }) {
+    const token = localStorage.getItem("token");
     const user = JSON.parse(localStorage.getItem("user"));
 
     // Belum login
-    if(!user) {
+    if(!token || !user) {
         return <Navigate to="/login" replace />
     }
 

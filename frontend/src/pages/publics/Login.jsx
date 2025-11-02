@@ -27,10 +27,10 @@ export default function Login() {
         }
 
         if (res.user && res.user.role) {
-            if(res.user.role === "admin") navigate("/admin/overview");
-            else if(res.user.role === "student") navigate("/student/dashboard");
-        } else {
-            setError("Login failed, try again...");
+            setTimeout(() => {
+                if(res.user.role === "admin") navigate("/admin/overview");
+                else if(res.user.role === "student") navigate("/student/dashboard");
+            }, 100);
         }
     };
 

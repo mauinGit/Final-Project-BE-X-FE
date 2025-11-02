@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { GetCourseById } from "../../service/course";
 import { useParams } from "react-router-dom";
 import CourseComment from "../../components/courses/CourseComment";
+import useUserCourse from "../../hooks/useUserCourse";
 
 export default function CourseDetail() {
     const { id } = useParams();
     const [detailCourse, setDetailCourse] = useState(null);
+    const { startCourse, updateProgress } = useUserCourse();
+    const videoRef = useRef(null);
+    const updateIntervalRef = useRef(null);
 
     useEffect(() => {
         if(!id) return;
@@ -13,19 +17,57 @@ export default function CourseDetail() {
         GetCourseById(id).then((data) => {
             setDetailCourse(data);
 
-            const viewed = JSON.parse(localStorage.getItem("viewedCourses")) || [];
-            const alreadyViewed = viewed.find(v => v.id === Number(id));
+            // const viewed = JSON.parse(localStorage.getItem("viewedCourses")) || [];
+            // const alreadyViewed = viewed.find(v => v.id === Number(id));
 
-            if(!alreadyViewed) {
-                viewed.push({
-                    id: data.id,
-                    title: data.title,
-                    category: data.category
-                });
-                localStorage.setItem("viewedCourses", JSON.stringify(viewed));
-            }
-        })
+            // if(!alreadyViewed) {
+            //     viewed.push({
+            //         id: data.id,
+            //         title: data.title,
+            //         category: data.category
+            //     });
+            //     localStorage.setItem("viewedCourses", JSON.stringify(viewed));
+            // }
+        });
+
+        // Mulai video course ketika komponent dirender
+        startCourse(id).catch(console.error);
     }, [id]);
+
+    // Handle video progress tracking
+    const handleVideoPlay = () => {
+        // update progress setiap 5 detik
+        updateIntervalRef.current = setInterval(() => {
+            if(videoRef.current) {
+                const currentTime = videoRef.current.currentTime;
+                const duration = videoRef.current.duration;
+
+                updateProgress(id, currentTime, duration)
+                    .catch(console.error);
+            }
+        }, 5000); // update setiap 5 detik
+    };
+
+    const handleVideoPause = () => {
+        if(updateIntervalRef.current) {
+            clearInterval(updateIntervalRef.current);
+        }
+
+        // Update progres ketika dijeda/paused
+        if(videoRef.current) {
+            const currentTime = videoRef.current.currentTime;
+            const duration = videoRef.current.duration;
+            updateProgress(id, currentTime, duration).catch(console.error);
+        }
+    };
+
+    useEffect(() => {
+        return() => {
+            if(updateIntervalRef.current) {
+                clearInterval(updateIntervalRef.current);
+            }
+        };
+    }, []);
 
     return(
         <section id="detailCourse" className="font-Open Sans p-6 relative w-full min-h-screen">
@@ -34,9 +76,13 @@ export default function CourseDetail() {
                 <p className="text-gray-500 text-xl font-medium">{detailCourse.category}</p>
 
                 <video 
+                    ref={videoRef}
                     className="w-full rounded-2xl border-2 border-black"
-                    src={detailCourse.video}
+                    src={detailCourse.videoUrl}
                     controls
+                    onPlay={handleVideoPlay}
+                    onPause={handleVideoPause}
+                    onEnded={handleVideoPause}
                 />
                 <div className="flex flex-col gap-5">
                     <h1 className="text-heading text-5xl font-semibold">Overview</h1>

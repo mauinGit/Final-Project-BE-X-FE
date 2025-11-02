@@ -37,8 +37,12 @@ export default function useAuth() {
                 return { error: true, message: "Invalid response from server" };
             }
 
+            localStorage.setItem("token", data.token);
             localStorage.setItem("user", JSON.stringify(data.user));
+
+
             setUser(data.user);
+            setToken(data.token);
 
             return { error: false, user: data.user };
         } catch (error) {
@@ -55,6 +59,7 @@ export default function useAuth() {
             console.error("Logout error:", error.message);
         } finally {
             localStorage.removeItem("token");
+            localStorage.removeItem("user");
             setToken(null);
             setUser(null);
         }

@@ -2,15 +2,16 @@ import { useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import { TbX } from "react-icons/tb";
 
-export default function SearchBar() {
+export default function SearchBar({ onSearch }) {
     const [searchInput, setSearchInput] = useState("");
 
     const handleSearch = async () => {
-        // nanti diisi harap bersabar...
-    }
+        onSearch(searchInput);
+    };
 
     const handleClear = () => {
         setSearchInput("");
+        onSearch("");
     };
 
     return(
@@ -18,6 +19,7 @@ export default function SearchBar() {
             <IoSearchOutline 
                 size={32}
                 className="text-gray-500 rounded-full p-1"
+                onClick={handleSearch}
             />
             <input 
                 type="input" 

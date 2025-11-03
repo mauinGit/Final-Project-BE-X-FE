@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 export default function SignUp() {
     const { register } = useAuth();
@@ -29,8 +30,10 @@ export default function SignUp() {
         );
 
         if(res.error){
+            toast.error(res.message || "Registration failed!");
             setError(res.message);
         } else {
+            toast.success("Account created successfully!");
             navigate("/login");
         }
     };

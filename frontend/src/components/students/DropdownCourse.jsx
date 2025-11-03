@@ -17,12 +17,12 @@ export default function DropdownCourse({ selected, setSelected }) {
     const allCategories = [{ id: "all", name: "All" }, ...categories];
 
     return(
-        <div className="relative w-56 sm:w-64 md:w-72">
+        <div className="relative w-60 sm:w-68 md:w-72">
             <ClickAwayListener onClickAway={handleClickAway}>
                 <div className="relative">
                     <div 
                         onClick={() => setIsDropdownVisible(!isDropdownVisible)}
-                        className="border-2 border-black bg-white px-4 sm:px-6 py-1 sm:py-2.5 sm:text-lg md:text-xl rounded-full w-full flex items-center text-heading justify-between cursor-pointer select-none"
+                        className="border-2 border-black bg-white px-4 sm:px-6 py-1 sm:py-2 sm:text-lg md:text-xl rounded-full w-full flex items-center text-heading justify-between cursor-pointer select-none"
                     >
                         {selected || "Choose Category"} 
                         <RiArrowDropDownLine 

@@ -22,7 +22,7 @@ export const CreateContacts = async (form, token = null) => {
         formData.append("message", form.message);
         if(!token) formData.append("email", form.email);
 
-        const res = await fetch(`${API_URL}/contact`, {
+        const res = await fetch(`${API_URL}/contact/message`, {
             method: "POST",
             body: formData,
             credentials: "include",

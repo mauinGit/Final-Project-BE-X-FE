@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 export default function ResetPass() {
     const [password, setPassword] = useState("");
@@ -18,16 +19,18 @@ export default function ResetPass() {
 
         const token = localStorage.getItem("reset_token");
         if(!token) {
+            toast.error("Reset token not found!");
             return;
         }
         
         const res = await resetPassword(token, password, confirmPassword);
 
         if(!res.error) {
+            toast.success("Password reset successful!");
             localStorage.removeItem("reset_token");
             navigate("/succesResetPassword");
         } else {
-            alert(res.message);
+            toast.error(res.message || "Failed to reset password!");
         }
     };
 

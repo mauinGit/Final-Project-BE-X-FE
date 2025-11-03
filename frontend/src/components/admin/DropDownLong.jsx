@@ -22,7 +22,7 @@ export default function DropDownLong({ selected, setSelected }) {
                 <div className="relative">
                     <div 
                         onClick={() => setIsDropdownVisible(!isDropdownVisible)}
-                        className="bg-secondaryBlue px-4 sm:px-6 py-1 sm:py-2.5 sm:text-lg md:text-xl rounded-full w-full flex items-center text-heading justify-between cursor-pointer select-none"
+                        className="bg-secondaryBlue px-4 sm:px-6 py-1 sm:py-2 sm:text-lg md:text-xl rounded-full w-full flex items-center text-heading justify-between cursor-pointer select-none"
                     >
                         {selected || "Choose Category"} 
                         <RiArrowDropDownLine 

@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 export default function Login() {
     const { login } = useAuth();
@@ -22,9 +23,12 @@ export default function Login() {
         const res = await login(form.email, form.password);
 
         if(res.error){
+            toast.error(res.message || "Login failed!");
             setError(res.message);
             return;
         }
+
+        toast.success("Login successful!");
 
         if (res.user && res.user.role) {
             if (res.user.role === "admin") {

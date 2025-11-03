@@ -1,10 +1,38 @@
-import Footer from "../../components/Footer";
+import { useState } from "react";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaInstagram } from "react-icons/fa6";
 import { GrYoutube } from "react-icons/gr";
+import { toast } from "react-hot-toast";
 import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
+import useContact from "../../hooks/useContact";
 
 export default function Contact() {
+    const { addContact } = useContact();
+    const [form, setForm] = useState({
+        name: "",
+        email: "",
+        message: "",
+    });
+    const [error, setError] = useState("");
+
+    const handleChange = (e) => {
+        const { id, value } = e.target;
+        setForm({ ...form, [id]: value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError("");
+        try {
+            await addContact(form);
+            toast.success("Message sent successfully!");
+            setForm({ name: "", email: "", message: "" });
+        } catch (error) {
+            toast.error("Failed to send message.");
+        }
+    };
+
     return(
         <section id="contact" className="font-Open Sans w-full min-h-screen">
             <Navbar />
@@ -57,13 +85,16 @@ export default function Contact() {
                 </div>
 
                 {/* Section Form */}
-                <form className="flex flex-col gap-10 w-full lg:w-3/5 mt-20 lg:mt-1">
+                <form onSubmit={handleSubmit} className="flex flex-col gap-10 w-full lg:w-3/5 mt-20 lg:mt-1">
                     <div className="flex flex-col sm:flex-row gap-8 w-full">
                         <div className="flex flex-col gap-4 w-full">
                             <label htmlFor="name" className="text-xl font-medium text-heading">Your Name</label>
                             <input 
                                 type="text" 
                                 id="name"
+                                value={form.name}
+                                onChange={handleChange}
+                                required
                                 placeholder="Your full name"
                                 className="rounded-full px-5 py-3 text-xl text-gray-500 bg-secondaryBlue focus:outline-none focus:ring-2 focus:ring-black"
                             />
@@ -73,6 +104,9 @@ export default function Contact() {
                             <input 
                                 type="email" 
                                 id="email"
+                                value={form.email}
+                                onChange={handleChange}
+                                required
                                 placeholder="Your email address"
                                 className="rounded-full px-5 py-3 text-xl text-gray-500 bg-secondaryBlue focus:outline-none focus:ring-2 focus:ring-black"
                             />
@@ -83,8 +117,11 @@ export default function Contact() {
                         <textarea 
                             id="message"
                             rows="5"
+                            value={form.message}
+                            onChange={handleChange}
+                            required
                             placeholder="Write something..."
-                            className="rounded-2xl px-5 py-3 text-xl text-gray-500 bg-secondaryBlue focus:outline-none focus:ring-2 focus:ring-black"
+                            className="rounded-2xl px-5 py-3 text-xl text-gray-500 bg-secondaryBlue focus:outline-none focus:ring-2 focus:ring-black cursor-pointer"
                         ></textarea>
                     </div>
                     <button 

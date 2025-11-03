@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 export default function ForgotPass() {
     const [email, setEmail] = useState("");
@@ -13,10 +14,11 @@ export default function ForgotPass() {
         const res = await forgotPassword(email);
 
         if(!res.error) {
+            toast.success("Email verified!");
             localStorage.setItem("reset_token", res.token);
             navigate("/resetPassword");
         } else {
-            alert(res.message);
+            toast.error(res.message || "Email not found!");
         }
     };
 

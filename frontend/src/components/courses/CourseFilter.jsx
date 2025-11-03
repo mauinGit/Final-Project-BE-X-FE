@@ -1,25 +1,19 @@
-export default function CourseFilter({ selected, setSelected }) {
+import useCategory from "../../hooks/useCategory";
 
-    const categories = [
-        "All",
-        "UI/UX",
-        "Front-End",
-        "Back-End",
-        "Mobile Development",
-        "Machine Learning",
-        "Cyber Security",
-        "Game Development"
-    ];
+export default function CourseFilter({ selected, setSelected }) {
+    const { categories } = useCategory();
+
+    const allCategories = [{ id: "all", name: "All" }, ...categories];
 
     return(
         <div className="py-4 px-4 sm:px-6 flex items-center justify-center gap-8 bg-secondBlue rounded-full mt-8 text-base sm:text-xl overflow-x-auto scrollbar-hide">
-            {categories.map((category) => (
+            {allCategories.map((category, index) => (
                 <button 
-                    key={category}
-                    onClick={() => setSelected(category)}
-                    className={`px-3 py-2 ${selected === category ? "bg-blue text-white rounded-full border-2 border-black cursor-pointer" : "text-gray-500"}`}
+                    key={category.id || index}
+                    onClick={() => setSelected(category.name)}
+                    className={`px-3 py-2 ${selected === category.name ? "bg-blue text-white rounded-full border-2 border-black cursor-pointer" : "text-gray-500"}`}
                 >
-                    {category}
+                    {category.name}
                 </button>
             ))}
         </div>

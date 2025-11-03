@@ -1,27 +1,20 @@
 import { useState } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import ClickAwayListener from '@mui/material/ClickAwayListener';
+import useCategory from "../../hooks/useCategory";
 
 export default function DropDownLong({ selected, setSelected }) {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-
-    const categories = [
-        "All",
-        "UI/UX",
-        "Front-End",
-        "Back-End",
-        "Mobile Development",
-        "Machine Learning",
-        "Cyber Security",
-        "Game Development"
-    ];
+    const { categories } = useCategory();
 
     const handleClickAway = () => setIsDropdownVisible(false);
 
     const handleSelect = (category) => {
-        setSelected(category);
+        setSelected(category.name);
         setIsDropdownVisible(false);
     };
+
+    const allCategories = [{ id: "all", name: "All" }, ...categories];
 
     return(
         <div className="relative">
@@ -39,17 +32,17 @@ export default function DropDownLong({ selected, setSelected }) {
                     </div>
                     {isDropdownVisible && (
                         <div className="absolute mt-2 w-full bg-white border-2 border-black rounded-3xl z-10 max-h-60 overflow-y-auto">
-                            {categories.map((category) => (
+                            {allCategories.map((category, index) => (
                                 <div
-                                    key={category}
+                                    key={category.id || index}
                                     onClick={() => handleSelect(category)}
                                     className={`px-4 sm:px-6 py-2 sm:text-base md:text-lg cursor-pointer ${
-                                        selected === category
+                                        selected === category.name
                                             ? "bg-secondaryBlue text-heading"
                                             : "hover:bg-secondaryBlue"
                                     }`}
                                 >
-                                    {category}
+                                    {category.name}
                                 </div>
                             ))}
                         </div>

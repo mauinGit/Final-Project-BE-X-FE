@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { IoBookmarkOutline } from "react-icons/io5";
 import { IoBookmark } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function CourseCard({ course }) {
     const [isSaved, setIsSaved] = useState(false);
 
     return(
-        <Link
-            to={`courses/${course.id}`}
+        <NavLink
+            to={`/student/dashboard/courses/${course.id}`}
             className="flex flex-col gap-4 cursor-pointer group"
         >
             <div className="relative rounded-2xl overflow-hidden border-2 border-black">
@@ -17,7 +17,7 @@ export default function CourseCard({ course }) {
                     alt={course.title}
                     className="h-64 w-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
-                {course.hasStarted && course.progress (
+                {course.hasStarted && course.progress > 0 && (
                     <div className="absolute top-3 left-3 bg-black bg-opacity-80 text-white px-3 py-1.5 rounded-full text-xl font-medium flex items-center gap-2">
                         <div className="w-12 bg-gray-400 rounded-full h-1.5">
                             <div 
@@ -59,6 +59,6 @@ export default function CourseCard({ course }) {
                     <p className="text-xl text-gray-500">{course.description}</p>
                 </div>
             </div>
-        </Link>
+        </NavLink>
     );
 };

@@ -3,26 +3,26 @@ import { createContext } from "react";
 import { Toaster } from "react-hot-toast";
 import useCategory from "./hooks/useCategory";
 
-// Pages
+// Pages Public
 import Home from "./pages/publics/Home";
 import Courses from "./pages/publics/Courses";
-import CourseDetail from "./pages/publics/CourseDetail";
 import Contact from "./pages/publics/Contact";
 import SignUp from "./pages/publics/SignUp";
 import Login from "./pages/publics/Login";
+import ForgotPass from "./pages/publics/ForgotPass";
+import ResetPass from "./pages/publics/ResetPass";
+import SuccesResetPass from "./pages/publics/SuccesResetPass";
 
 // Student Pages
 import CourseStudent from "./pages/students/Courses";
 import MyCourses from "./pages/students/MyCourses";
 import Dashboard from "./pages/students/Dashboard";
+import CourseDetail from "./pages/students/CourseDetail";
 
 // Admin Pages
 import Overview from "./pages/admin/Overview";
 import CoursesAdmin from "./pages/admin/Courses";
 import ContactAdmin from "./pages/admin/Contact";
-import ForgotPass from "./pages/publics/ForgotPass";
-import ResetPass from "./pages/publics/ResetPass";
-import SuccesResetPass from "./pages/publics/SuccesResetPass";
 import AddCourse from "./pages/admin/AddCourse";
 import EditCourse from "./pages/admin/EditCourse";
 
@@ -43,7 +43,6 @@ function App() {
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/courses" element={<Courses />} />
-        <Route path="/courses/:id" element={<CourseDetail />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
@@ -73,6 +72,13 @@ function App() {
           element={
             <ProtectedRoute allowedRole="student">
               <MyCourses />
+            </ProtectedRoute>
+          } 
+        />
+        <Route path="/student/dashboard/courses/:id" 
+          element={
+            <ProtectedRoute allowedRole="student">
+              <CourseDetail />
             </ProtectedRoute>
           } 
         />

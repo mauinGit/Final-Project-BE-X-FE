@@ -12,6 +12,7 @@ export default function useUserCourse() {
             setMyCourses(data);
         } catch (error) {
             setError(error.message);
+            setMyCourses([]);
         }
     };
 
@@ -19,6 +20,7 @@ export default function useUserCourse() {
     const startCourse = async (courseId) => {
         try {
             const result = await StartCourse(courseId);
+            await fetchMyCourses();
             return result;
         } catch (error) {
             setError(error.message);
@@ -30,6 +32,7 @@ export default function useUserCourse() {
     const updateProgress = async (courseId, currentTime, duration) => {
         try {
             const result = await UpdateProgress(courseId, currentTime, duration);
+            await fetchMyCourses();
             return result;
         } catch (error) {
             setError(error.message);

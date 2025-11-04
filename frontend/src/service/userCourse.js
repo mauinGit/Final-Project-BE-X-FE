@@ -3,11 +3,11 @@ const API_URL = import.meta.env.VITE_API_URL;
 // Start Course
 export const StartCourse = async (courseId) => {
     try {
-        const res = await fetch(`${API_URL}/userscourses/start/${courseId}`, {
+        const res = await fetch(`${API_URL}/userscourses/${courseId}/start`, {
             method: "POST",
             credentials: "include",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
             },
         });
 
@@ -18,7 +18,7 @@ export const StartCourse = async (courseId) => {
     } catch (error) {
         console.error("Start course error:", error.message);
         throw error;
-    }
+    };
 };
 
 // Update Progres Course
@@ -28,8 +28,8 @@ export const UpdateProgress = async (courseId, currentTime, duration) => {
         formData.append("current_time", currentTime.toString());
         formData.append("duration", duration.toString());
 
-        const res = await fetch(`${API_URL}/userscourses/progress/${courseId}`, {
-            method: "PUT",
+        const res = await fetch(`${API_URL}/userscourses/${courseId}/progress`, {
+            method: "PATCH",
             credentials: "include",
             body: formData,
         });
@@ -41,7 +41,7 @@ export const UpdateProgress = async (courseId, currentTime, duration) => {
     } catch (error) {
         console.error("Update progress error:", error.message);
         throw error;        
-    }
+    };
 };
 
 // Get User Course
@@ -51,6 +51,11 @@ export const GetMyCourse = async () => {
             method: "GET",
             credentials: "include",
         });
+
+        if(res.status === 401) {
+            console.warn("User not authenticated");
+            return [];
+        }
 
         const data = await res.json();
         if(!res.ok) throw new Error(data.error || "Failed to fetch my courses");
@@ -68,5 +73,5 @@ export const GetMyCourse = async () => {
     } catch (error) {
         console.error("Get my courses error:", error.message);
         return [];
-    }
+    };
 };

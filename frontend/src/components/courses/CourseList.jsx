@@ -6,13 +6,16 @@ import useUserCourse from "../../hooks/useUserCourse";
 import useCourse from "../../hooks/useCourse";
 
 export default function CourseList({ selectedCategory = "All", searchTerm = "" }) {
-    const [courses, setCourses] = useState([]);
-    const { data: course } = useCourse();
-    const { myCourses } = useUserCourse();
+    const { data: courses, error: courseError } = useCourse();
+    const { myCourses, error: userCourseError } = useUserCourse();
 
-    useEffect(() => {
-        GetCourse().then(setCourses);
-    }, []);
+    // useEffect(() => {
+    //     GetCourse().then(setCourses);
+    // }, []);
+
+    if (courseError || userCourseError) {
+        return <p className="text-center text-xl text-red-500">Failed to load courses</p>;
+    }
 
     const courseWithProgress = courses.map((course) => {
         const userCourse = myCourses.find((mc) => mc.courseId === course.id);

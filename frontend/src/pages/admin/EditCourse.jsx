@@ -1,4 +1,4 @@
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useParams, useNavigate  } from "react-router-dom";
 import { useState, useContext, useEffect } from "react";
 import { CategoryContext } from "../../App";
 import toast from "react-hot-toast";
@@ -6,12 +6,15 @@ import SideBarAdmin from "../../components/admin/SidebarAdmin";
 import TopbarAdmin from "../../components/admin/TopbarAdmin";
 import DropDownLong from "../../components/admin/DropDownLong";
 import useCourse from "../../hooks/useCourse";
+import useCategory from "../../hooks/useCategory";
 
 export default function EditCourse() {
     const { id } = useParams();
+    const navigate = useNavigate();
     const { data: course, updateCourse } = useCourse(id);
     const [fileName, setFileName] = useState("No file chosen");
     const { selectedCategory, setSelectedCategory } = useContext(CategoryContext);
+    const { categories } = useCategory();
     const [form, setForm] = useState({
         title: "",
         videoUrl: "",
@@ -26,9 +29,15 @@ export default function EditCourse() {
                 title: course.title || "",
                 videoUrl: course.videoUrl || "",
                 category: course.category || "",
-                cover: course.cover || null,
+                cover: null,
                 description: course.description || "",
             });
+            setSelectedCategory(course.category || "All");
+
+            if(course.cover) {
+                const urlParts = course.cover.split('/');
+                setFileName(urlParts[urlParts.length - 1] || "Current cover");
+            }
         }
     }, [course]);
 
@@ -41,9 +50,17 @@ export default function EditCourse() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const selectedCategoryObj = categories.find(cat => cat.name === selectedCategory);
+        const categoryId = selectedCategoryObj?.id;
+
         try {
-            await updateCourse(form);
-            toast.success("Course update successfully!")
+            const updateData = {
+                ...form,
+                category_id: categoryId,
+            };
+            await updateCourse(updateData);
+            toast.success("Course update successfully!");
+            setTimeout(() => navigate("/admin/courses"), 1000);
         } catch (error) {
             console.error("Failed to update:", error);
             toast.error("Failed to update course")
@@ -102,7 +119,7 @@ export default function EditCourse() {
                                     <input 
                                         type="url" 
                                         id="videoUrl"
-                                        value={form.email}
+                                        value={form.videoUrl}
                                         onChange={handleChange}
                                         placeholder="Enter your video url"
                                         className="w-full rounded-full px-5 py-3 text-xl text-gray-500 bg-secondaryBlue focus:outline-none focus:ring-2 focus:ring-black"

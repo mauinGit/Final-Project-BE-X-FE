@@ -49,11 +49,11 @@ export default function TableCourse() {
                                 </td>
                                 <td className="py-6 px-4 whitespace-nowrap text-xl text-gray-500">{course.category}</td>
                                 <td className="py-6 px-4 whitespace-nowrap text-xl flex flex-row gap-3 text-gray-500">
-                                    <button className="bg-secondaryBlue py-2 px-5">
+                                    <button className="bg-secondaryBlue py-3 px-3 rounded-xl hover:bg-blue hover:text-white">
                                         <NavLink
                                             to={`/admin/editCourse/${course.id}`}
                                         >
-                                            <FiEdit size= "26"/>
+                                            <FiEdit size= "24" style={{ strokeWidth: 1.5 }} />
                                         </NavLink>
                                     </button>
                                     <button 
@@ -64,9 +64,9 @@ export default function TableCourse() {
                                                 .catch(() => toast.error("Failed to delete course."));
                                             }
                                         }}
-                                        className="bg-secondaryBlue py-2 px-5"
+                                        className="bg-secondaryBlue py-3 px-3 rounded-xl cursor-pointer hover:bg-blue hover:text-white"
                                     >
-                                        <PiTrashSimple size= "26" />
+                                        <PiTrashSimple size= "24" />
                                     </button>
                                 </td>
                             </tr>

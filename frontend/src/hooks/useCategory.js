@@ -17,7 +17,7 @@ export default function useCategory(id = null) {
         setError(null);
         try {
             const data = await GetCategories();
-            setCategories(data);
+            setCategories(data || []);
         } catch (error) {
             setError(error.message);
         }

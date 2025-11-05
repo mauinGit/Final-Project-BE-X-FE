@@ -14,6 +14,14 @@ export default function DropDownLong({ selected, setSelected }) {
         setIsDropdownVisible(false);
     };
 
+    if (!categories || categories.length === 0) {
+        return (
+            <div className="bg-secondaryBlue px-4 sm:px-6 py-1 sm:py-2 sm:text-lg md:text-xl rounded-full w-full flex items-center text-gray-400 justify-between">
+                Loading categories...
+            </div>
+        );
+    }
+
     const allCategories = [{ id: "all", name: "All" }, ...categories];
 
     return(
@@ -32,9 +40,9 @@ export default function DropDownLong({ selected, setSelected }) {
                     </div>
                     {isDropdownVisible && (
                         <div className="absolute mt-2 w-full bg-white border-2 border-black rounded-3xl z-10 max-h-60 overflow-y-auto">
-                            {allCategories.map((category, index) => (
+                            {allCategories.map((category) => (
                                 <div
-                                    key={category.id || index}
+                                    key={category.id}
                                     onClick={() => handleSelect(category)}
                                     className={`px-4 sm:px-6 py-2 sm:text-base md:text-lg cursor-pointer ${
                                         selected === category.name

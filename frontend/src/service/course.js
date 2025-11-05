@@ -16,10 +16,11 @@ export const GetCourse = async () => {
                 ? item.cover
                 : `${API_URL}/assets/${item.cover}`,
             videoUrl: item.video_url,
-            category: item.category?.name || "Uncategorized",
+            category: item.category || "Uncategorized",
+            categoryId: item.category_id,
         }));
     } catch (error) {
-        console.log("error");
+        console.log("Error fetching courses:", error);
         return[];
     }
 };
@@ -42,9 +43,11 @@ export const GetCourseById = async (id) => {
                 : `${API_URL}/assets/${item.cover}`,
             videoUrl: item.video_url,
             category: item.category?.name || "Uncategorized",
+            categoryId: item.category_id,
+            overview: item.overview || "",
         };
     } catch (error) {
-        console.log("error");
+        console.log("Error fetching course:", error);
         return null;
     }
 };
@@ -54,9 +57,11 @@ export const CreateCourse = async (form) => {
     try {
         const formData = new FormData();
         formData.append("title", form.title);
-        formData.append("videoUrl", form.videoUrl);
-        formData.append("category", form.category);
+        formData.append("video_url", form.videoUrl);
+        // formData.append("category", form.category);
+        formData.append("category_id", form.categoryId);
         formData.append("description", form.description);
+        formData.append("overview", form.overview || form.description);
         if(form.cover) formData.append("cover", form.cover);
 
         const res = await fetch(`${API_URL}/courses`, {
@@ -79,10 +84,12 @@ export const UpdateCourse = async (id, form) => {
     try {
         const formData = new FormData();
         formData.append("title", form.title);
-        formData.append("videoUrl", form.videoUrl);
-        formData.append("category", form.category);
+        formData.append("video_url", form.videoUrl);
+        // formData.append("category", form.category);
+        formData.append("category_id", form.categoryId);
         formData.append("description", form.description);
-        if(form.cover) formData.append("cover", form.cover);
+        formData.append("overview", form.overview || form.description);
+        if(form.cover instanceof File) formData.append("cover", form.cover);
 
         const res = await fetch(`${API_URL}/courses/${id}`, {
             method: "PUT",

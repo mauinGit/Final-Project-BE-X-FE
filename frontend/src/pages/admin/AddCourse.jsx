@@ -41,9 +41,7 @@ export default function AddCourse() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // const selectedCategoryObj = categories.find(cat => 
-        //     cat.name === selectedCategory || cat.id === selectedCategory);
-        // // const categoryId = selectedCategoryObj?.id;
+
         if(!selectedCategory || !selectedCategory.id) {
             toast.error("Please select a category");
             return;
@@ -118,7 +116,7 @@ export default function AddCourse() {
                             </div>
                             <div className="flex flex-col gap-3 w-full">
                                 <label htmlFor="category" className="text-xl font-medium text-heading">Category</label>
-                                <DropDownLong selected={selectedCategory} setSelected={setSelectedCategory} />
+                                <DropDownLong selected={selectedCategory} setSelected={setSelectedCategory} categories={categories} />
                             </div>
                             <div className="flex flex-col gap-3 w-full">
                                 <label htmlFor="cover" className="text-xl font-medium text-heading">Cover</label>

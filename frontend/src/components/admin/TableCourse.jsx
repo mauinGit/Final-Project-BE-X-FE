@@ -26,8 +26,8 @@ export default function TableCourse() {
                     <tbody>
                         {courses.map((course) => (
                             <tr key={course.id} className="border-b border-gray-200 relative">
-                                <td className="py-6 px-4 whitespace-nowrap text-xl text-gray-500">{course.title}</td>
-                                <td className="py-6 p-4 whitespace-nowrap text-xl text-gray-500">
+                                <td className="py-4 px-4 whitespace-nowrap text-xl text-gray-500">{course.title}</td>
+                                <td className="py-4 p-4 whitespace-nowrap text-xl text-gray-500">
                                     {course.videoUrl ? (
                                         <a
                                             href={course.videoUrl.startsWith("http") 
@@ -44,8 +44,8 @@ export default function TableCourse() {
                                         "-"
                                     )}
                                 </td>
-                                <td className="py-6 px-4 whitespace-nowrap text-xl text-gray-500">{course.description?.slice(0, 40)}</td>
-                                <td className="py-6 px-4 whitespace-nowrap text-xl text-gray-500">
+                                <td className="py-4 px-4 whitespace-nowrap text-xl text-gray-500">{course.description?.slice(0, 40)}</td>
+                                <td className="py-4 px-4 whitespace-nowrap text-xl text-gray-500">
                                     {course.cover ? (
                                         <img
                                             src={course.cover}
@@ -56,8 +56,8 @@ export default function TableCourse() {
                                         "-"
                                     )}
                                 </td>
-                                <td className="py-6 px-4 whitespace-nowrap text-xl text-gray-500">{course.category}</td>
-                                <td className="py-6 px-4 whitespace-nowrap text-xl flex flex-row gap-3 text-gray-500">
+                                <td className="py-4 px-4 whitespace-nowrap text-xl text-gray-500">{course.category}</td>
+                                <td className="py-4 px-4 whitespace-nowrap text-xl flex flex-row gap-3 text-gray-500">
                                     <button className="bg-secondaryBlue py-3 px-3 rounded-xl hover:bg-green hover:text-white">
                                         <NavLink
                                             to={`/admin/editCourse/${course.id}`}

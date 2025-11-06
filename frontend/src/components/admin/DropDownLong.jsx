@@ -1,16 +1,13 @@
 import { useState } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import ClickAwayListener from '@mui/material/ClickAwayListener';
-import useCategory from "../../hooks/useCategory";
 
-export default function DropDownLong({ selected, setSelected }) {
+export default function DropDownLong({ selected, setSelected, categories }) {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-    const { categories } = useCategory();
 
     const handleClickAway = () => setIsDropdownVisible(false);
 
     const handleSelect = (category) => {
-        // setSelected(category.name);
         setSelected(category);
         setIsDropdownVisible(false);
     };
@@ -25,7 +22,7 @@ export default function DropDownLong({ selected, setSelected }) {
                         onClick={() => setIsDropdownVisible(!isDropdownVisible)}
                         className="bg-secondaryBlue px-4 sm:px-6 py-1 sm:py-2 sm:text-lg md:text-xl rounded-full w-full flex items-center text-heading justify-between cursor-pointer select-none"
                     >
-                        {selected?.name || selected || "Choose Category"}
+                        {typeof selected === 'object' ? selected?.name : selected || "Choose Category"}
                         <RiArrowDropDownLine 
                             size={34} 
                             className={`text-heading transition-transform duration-300 ${isDropdownVisible ? "rotate-180" : ""}`}

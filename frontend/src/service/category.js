@@ -11,7 +11,15 @@ export const GetCategories = async () => {
 
         const data = await res.json();
         console.log("Category response:", data);
-        return data.Category || data.category || [];
+
+        const categories = data.category || data.categories || [];
+        const formatted = categories.map(cat => ({
+            id: cat.ID || cat.id,
+            name: cat.Name || cat.name,
+            courses: cat.Courses || cat.courses || []
+        }));
+
+        return formatted;
     } catch (error) {
         console.error("Error fetching categories:", error);
         return[];

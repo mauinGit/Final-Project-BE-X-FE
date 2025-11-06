@@ -18,21 +18,25 @@ export default function EditCourse() {
     const [form, setForm] = useState({
         title: "",
         videoUrl: "",
+        videoFile: null,
         category: "",
         cover: null,
         description: "",
     });
 
     useEffect(() => {
-        if(course) {
+        if(course && categories.length > 0) {
+            const categoryObj = categories.find(cat => cat.name === course.category);
+
             setForm({
                 title: course.title || "",
                 videoUrl: course.videoUrl || "",
-                category: course.category || "",
+                videoFile: null,
+                category: categoryObj || course.category,
                 cover: null,
                 description: course.description || "",
             });
-            setSelectedCategory(course.category || "All");
+            setSelectedCategory(categoryObj || course.category);
 
             if(course.cover) {
                 const urlParts = course.cover.split('/');
@@ -50,13 +54,22 @@ export default function EditCourse() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const selectedCategoryObj = categories.find(cat => cat.name === selectedCategory);
-        const categoryId = selectedCategoryObj?.id;
+
+        let categoryId;
+        if(typeof selectedCategory === 'object' && selectedCategory?.id) {
+            categoryId = selectedCategory.id;
+        } else if (typeof selectedCategory === 'string') {
+            const categoryObj = categories.find(cat => cat.name === selectedCategory);
+            categoryId = categoryObj?.id;
+        }
 
         try {
             const updateData = {
-                ...form,
+                title: form.title,
+                videoUrl: form.videoFile || form.videoUrl,
                 category_id: categoryId,
+                description: form.description,
+                cover: form.cover,
             };
             await updateCourse(updateData);
             toast.success("Course update successfully!");

@@ -89,14 +89,14 @@ src/
 ## 🔄 Application Flow
 Terdapat 2 role dalam sistem GDCourse, yaitu Admin dan Student. Masing-masing role memiliki fitur dan alur atau akses yang berbeda.
 
-# 👩‍🎓 Student
+- 👩‍🎓 Student
 1. Mendaftar akun baru (default role: student). 
 2. Login ke sistem menggunakan email & password.  
 3. Melihat daftar course berdasarkan kategori.  
 4. Mengikuti course dan mengakses materi di dalamnya.  
 5. Memberikan review atau komentar setelah menyelesaikan course.
 
-# 🛠️ Admin
+- 🛠️ Admin
 1. Login dengan role admin.  
 2. Mengelola seluruh data course dan contact.    
 3. Membuat course baru dengan informasi lengkap (judul, deskripsi, kategori, cover, dan video course).

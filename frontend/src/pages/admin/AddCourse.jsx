@@ -41,14 +41,20 @@ export default function AddCourse() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const selectedCategoryObj = categories.find(cat => cat.name === selectedCategory);
-        const categoryId = selectedCategoryObj?.id;
+        // const selectedCategoryObj = categories.find(cat => 
+        //     cat.name === selectedCategory || cat.id === selectedCategory);
+        // // const categoryId = selectedCategoryObj?.id;
+        if(!selectedCategory || !selectedCategory.id) {
+            toast.error("Please select a category");
+            return;
+        }
+
+        const addData = {
+            ...form,
+            category_id: selectedCategory.id,
+        };
         
         try {
-            const addData = {
-                ...form,
-                category_id: categoryId,
-            };
             await createCourse(addData);
             toast.success("Course added successfully!");
             navigate("/admin/courses");

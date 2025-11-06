@@ -110,6 +110,7 @@ func GetCourse(c *fiber.Ctx) error {
 			ID:          course.ID,
 			Title:       course.Title,
 			Description: course.Description,
+			VideoURL:  	 course.VideoURL,
 			Cover:       course.Cover,
 			PostedAt:    course.PostedAt,
 			Category:    course.Category.Name,

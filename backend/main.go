@@ -15,7 +15,7 @@ func main() {
 	database.DBInit()
 	database.DBMigrate()
 	app := fiber.New(fiber.Config{
-		BodyLimit: 50 * 1024 * 1024,
+		BodyLimit: 200 * 1024 * 1024,
 	})
 
 	app.Use(cors.New(cors.Config{

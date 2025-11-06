@@ -42,19 +42,21 @@ func GetAllCategory(c *fiber.Ctx) error {
 
 	var response []model.CategoryResponse
 
-	for _, cat := range categories {
+	for _, category := range categories {
 		var courseList []model.CourseResponse
-		for _, course := range cat.Courses {
+		for _, course := range category.Courses {
 			courseList = append(courseList, model.CourseResponse{
-				Title:       course.Title,
-				Description: course.Description,
-				Cover:       course.Cover,
-				VideoURL:    course.VideoURL,
+				ID: 		   	course.ID,
+				Title:       	course.Title,
+				Description: 	course.Description,
+				Cover:       	course.Cover,
+				VideoURL:    	course.VideoURL,
 			})
 		}
 
 		response = append(response, model.CategoryResponse{
-			Name:    cat.Name,
+			ID:      category.ID,
+			Name:    category.Name,
 			Courses: courseList,
 		})
 	}
@@ -77,14 +79,16 @@ func GetCategoryByID(c *fiber.Ctx) error {
 	var courseList []model.CourseResponse
 	for _, course := range category.Courses {
 		courseList = append(courseList, model.CourseResponse{
-			Title:       course.Title,
-			Description: course.Description,
-			Cover:       course.Cover,
-			VideoURL:    course.VideoURL,
+			ID: 	   		course.ID,
+			Title:       	course.Title,
+			Description: 	course.Description,
+			Cover:       	course.Cover,
+			VideoURL:    	course.VideoURL,
 		})
 	}
 
 	response := model.CategoryResponse{
+		ID:      category.ID,
 		Name:    category.Name,
 		Courses: courseList,
 	}

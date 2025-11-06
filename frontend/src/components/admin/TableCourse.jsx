@@ -28,12 +28,21 @@ export default function TableCourse() {
                             <tr key={course.id} className="border-b border-gray-200 relative">
                                 <td className="py-6 px-4 whitespace-nowrap text-xl text-gray-500">{course.title}</td>
                                 <td className="py-6 p-4 whitespace-nowrap text-xl text-gray-500">
-                                    <a 
-                                        href="#"
-                                        className="font-medium text-blue hover:underline"
-                                    >
-                                        {course.videoUrl ? "Link URL" : "-"}
-                                    </a>
+                                    {course.videoUrl ? (
+                                        <a
+                                            href={course.videoUrl.startsWith("http") 
+                                                ? course.videoUrl 
+                                                : `${import.meta.env.VITE_API_URL}/assets/${course.videoUrl}`
+                                            }
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-blue font-medium hover:underline"
+                                        >
+                                            View Video
+                                        </a>
+                                    ) : (
+                                        "-"
+                                    )}
                                 </td>
                                 <td className="py-6 px-4 whitespace-nowrap text-xl text-gray-500">{course.description?.slice(0, 40)}</td>
                                 <td className="py-6 px-4 whitespace-nowrap text-xl text-gray-500">

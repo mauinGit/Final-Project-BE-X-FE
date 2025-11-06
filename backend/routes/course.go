@@ -11,5 +11,5 @@ func routesCourse(api fiber.Router) {
 	course.Get("/", controllers.GetCourse)
 	course.Get("/:id", controllers.GetCourseByID)
 	course.Put("/:id", controllers.UpdateCourse)
-	course.Delete("/:id", controllers.DeleteCategory)
+	course.Delete("/:id", controllers.DeleteCourse)
 }

@@ -23,6 +23,7 @@ type CourseListResponse struct {
 	Title       string    `json:"title"`
 	Description string    `json:"description"`
 	Cover       string    `json:"cover"`
+	VideoURL	string    `json:"video_url"`
 	PostedAt    time.Time `json:"posted_at"`
 	Category    string    `json:"category"`
 }

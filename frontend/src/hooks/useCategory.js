@@ -73,7 +73,6 @@ export default function useCategory(id = null) {
         }
     }, [id]);
 
-
     return { 
         selectedCategory, 
         setSelectedCategory,

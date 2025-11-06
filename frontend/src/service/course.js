@@ -59,7 +59,7 @@ export const CreateCourse = async (form) => {
         formData.append("title", form.title);
         formData.append("video_url", form.videoUrl);
         // formData.append("category", form.category);
-        formData.append("category_id", form.categoryId);
+        formData.append("category_id", form.category_id);
         formData.append("description", form.description);
         formData.append("overview", form.overview || form.description);
         if(form.cover) formData.append("cover", form.cover);
@@ -85,8 +85,7 @@ export const UpdateCourse = async (id, form) => {
         const formData = new FormData();
         formData.append("title", form.title);
         formData.append("video_url", form.videoUrl);
-        // formData.append("category", form.category);
-        formData.append("category_id", form.categoryId);
+        formData.append("category_id", form.category_id);
         formData.append("description", form.description);
         formData.append("overview", form.overview || form.description);
         if(form.cover instanceof File) formData.append("cover", form.cover);

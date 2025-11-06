@@ -10,12 +10,8 @@ export const GetCategories = async () => {
         if(!res.ok) throw new Error("Failed to fetch categories");
 
         const data = await res.json();
-        // return data.categories.map((cat) => ({
-        //     id: cat.id || null,
-        //     name: cat.name,
-        //     courseCount: cat.course?.length || 0,
-        // }));
-        return data.category;
+        console.log("Category response:", data);
+        return data.Category || data.category || [];
     } catch (error) {
         console.error("Error fetching categories:", error);
         return[];

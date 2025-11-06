@@ -41,7 +41,7 @@ export default function TableCourse() {
                                         <img
                                             src={course.cover}
                                             alt={course.title}
-                                            className="w-16 h-10 object-cover rounded-md"
+                                            className="w-20 h-16 object-cover rounded-md"
                                         />
                                     ) : (
                                         "-"
@@ -49,7 +49,7 @@ export default function TableCourse() {
                                 </td>
                                 <td className="py-6 px-4 whitespace-nowrap text-xl text-gray-500">{course.category}</td>
                                 <td className="py-6 px-4 whitespace-nowrap text-xl flex flex-row gap-3 text-gray-500">
-                                    <button className="bg-secondaryBlue py-3 px-3 rounded-xl hover:bg-blue hover:text-white">
+                                    <button className="bg-secondaryBlue py-3 px-3 rounded-xl hover:bg-green hover:text-white">
                                         <NavLink
                                             to={`/admin/editCourse/${course.id}`}
                                         >
@@ -64,7 +64,7 @@ export default function TableCourse() {
                                                 .catch(() => toast.error("Failed to delete course."));
                                             }
                                         }}
-                                        className="bg-secondaryBlue py-3 px-3 rounded-xl cursor-pointer hover:bg-blue hover:text-white"
+                                        className="bg-secondaryBlue py-3 px-3 rounded-xl cursor-pointer hover:bg-red hover:text-white"
                                     >
                                         <PiTrashSimple size= "24" />
                                     </button>

@@ -115,19 +115,44 @@ export default function EditCourse() {
                                     />
                             </div>
                             <div className="flex flex-col gap-3 w-full">
-                                <label htmlFor="videoUrl" className="text-xl font-medium text-heading">Video URL</label>
-                                    <input 
-                                        type="url" 
-                                        id="videoUrl"
-                                        value={form.videoUrl}
-                                        onChange={handleChange}
-                                        placeholder="Enter your video url"
-                                        className="w-full rounded-full px-5 py-3 text-xl text-gray-500 bg-secondaryBlue focus:outline-none focus:ring-2 focus:ring-black"
-                                    />
+                                <label htmlFor="videoUrl" className="text-xl font-medium text-heading">Video File</label>
+                                <div className="flex w-full rounded-full bg-secondaryBlue text-xl text-gray-500 overflow-hidden">
+                                    <label
+                                        htmlFor="videoUrl"
+                                        className="bg-gray-200 text-heading px-5 py-3 cursor-pointer hover:bg-gray-300 transition whitespace-nowrap"
+                                    >
+                                        Choose File
+                                    </label>
+                                    <span className="flex-1 px-4 py-3 truncate">
+                                    {form.videoFile
+                                        ? form.videoFile.name
+                                        : form.videoUrl
+                                        ? form.videoUrl.split("/").pop()
+                                        : "No file chosen"}
+                                    </span>
+                                </div>
+                                <input
+                                    type="file"
+                                    id="videoUrl"
+                                    accept="video/*"
+                                    onChange={(e) => {
+                                    const file = e.target.files[0];
+                                    if (file) {
+                                        setForm({ ...form, videoFile: file });
+                                    } else {
+                                        setForm({ ...form, videoFile: null });
+                                    }
+                                    }}
+                                    className="hidden"
+                                />
                             </div>
                             <div className="flex flex-col gap-3 w-full">
                                 <label htmlFor="category" className="text-xl font-medium text-heading">Category</label>
-                                <DropDownLong selected={selectedCategory} setSelected={setSelectedCategory} />
+                                <DropDownLong 
+                                    selected={selectedCategory} 
+                                    setSelected={setSelectedCategory} 
+                                    categories={categories}
+                                />
                             </div>
                             <div className="flex flex-col gap-3 w-full">
                                 <label htmlFor="cover" className="text-xl font-medium text-heading">Cover</label>

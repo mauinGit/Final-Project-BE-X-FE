@@ -66,6 +66,7 @@ export const CreateCourse = async (form) => {
         const res = await fetch(`${API_URL}/courses`, {
             method: "POST",
             body: formData,
+            credentials: "include",
         });
 
         if(!res.ok) throw new Error("Failed to create course");
@@ -94,6 +95,7 @@ export const UpdateCourse = async (id, form) => {
         const res = await fetch(`${API_URL}/courses/${id}`, {
             method: "PUT",
             body: formData,
+            credentials: "include",
         });
 
         if(!res.ok) throw new Error("Failed to update course");
@@ -111,6 +113,7 @@ export const DeleteCourse = async (id) => {
     try {
         const res = await fetch(`${API_URL}/courses/${id}`, {
             method: "DELETE",
+            credentials: "include"
         });
 
         if(!res.ok) throw new Error("Failed to delete course");

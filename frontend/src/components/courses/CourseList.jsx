@@ -2,16 +2,11 @@ import CourseCard from "./CourseCard";
 import { GetCourse } from "../../service/course";
 import { useEffect, useState } from "react";
 import useUserCourse from "../../hooks/useUserCourse";
-// import { progress } from "framer-motion";
 import useCourse from "../../hooks/useCourse";
 
 export default function CourseList({ selectedCategory = "All", searchTerm = "" }) {
     const { data: courses, error: courseError } = useCourse();
     const { myCourses, error: userCourseError } = useUserCourse();
-
-    // useEffect(() => {
-    //     GetCourse().then(setCourses);
-    // }, []);
 
     if (courseError || userCourseError) {
         return <p className="text-center text-xl text-red-500">Failed to load courses</p>;
@@ -25,11 +20,6 @@ export default function CourseList({ selectedCategory = "All", searchTerm = "" }
             hasStarted: !!userCourse,
         };
     });
-
-    // const filteredCourses = 
-    //     selectedCategory === "All"
-    //         ? courseWithProgress
-    //         : courseWithProgress.filter((course) => course.category === selectedCategory);
 
     // Filter based by category & search
     const filteredCourses = courseWithProgress.filter((course) => {

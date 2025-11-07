@@ -63,7 +63,7 @@ export const GetMyCourse = async () => {
         const courses = data.courses ?? []; 
 
         return courses.map((item) => ({
-            courseId: item.course_id,
+            id: item.course_id,
             title: item.title,
             cover: item.cover?.startsWith("http")
                 ? item.cover

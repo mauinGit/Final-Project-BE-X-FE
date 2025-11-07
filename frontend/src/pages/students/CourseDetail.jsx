@@ -17,12 +17,19 @@ export default function CourseDetail() {
     useEffect(() => {
         if(!id) return;
 
-        GetCourseById(id).then((data) => {
-            setDetailCourse(data);
-        });
+        const loadCourse = async () => {
+            try {
+                const data = await GetCourseById(id);
+                if(data) {
+                    setDetailCourse(data);
+                    await startCourse(id);
+                }
+            } catch (error) {
+                console.error("Error fetching or starting course:", error);
+            }
+        };
 
-        // Mulai video course ketika komponent dirender
-        startCourse(id).catch(console.error);
+        loadCourse();
     }, [id]);
 
     // Handle video progress tracking

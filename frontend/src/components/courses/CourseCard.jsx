@@ -1,6 +1,21 @@
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 export default function CourseCard({ course }) {
+    const [duration, setDuration] = useState(null);
+
+    useEffect(() => {
+        if(course.videoUrl) {
+            const video = document.createElement("video");
+            video.src = course.videoUrl;
+            video.addEventListener("loadedmetadata", () => {
+                const minutes = Math.floor(video.duration / 60);
+                const seconds = Math.floor(video.duration % 60);
+                setDuration(`${minutes}:${seconds < 10 ? "0" : ""}${seconds}`);
+            });
+        }
+    }, [course.videoUrl]);
+
     return(
         <NavLink
             to={`/student/dashboard/courses/${course.id}`}
@@ -12,32 +27,28 @@ export default function CourseCard({ course }) {
                     alt={course.title}
                     className="h-64 w-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
-                {course.hasStarted && course.progress > 0 && (
-                    <div className="absolute top-3 left-3 bg-black bg-opacity-80 text-white px-3 py-1.5 rounded-full text-xl font-medium flex items-center gap-2">
-                        <div className="w-12 bg-gray-400 rounded-full h-1.5">
-                            <div 
-                                className="h-full bg-blue rounded-full"
-                                style={{ width: `${course.progress}%` }}
-                            >
-                            </div>
-                        </div>
-                        <span>{Math.round(course.progress)}%</span>
+                {(course.duration || duration)&& (
+                    <span className="absolute bottom-3 right-2 z-20 backdrop-blur-xl bg-black/30 text-white text-base font-semibold px-2 py-0.5 rounded-lg">
+                        {course.duration || duration}
+                    </span>
+                )}
+                {(course.hasStarted || course.progress > 0) && (
+                    <div className="absolute bottom-0 left-0 w-full h-1.5 bg-gray-200 z-10">
+                        <div
+                            className="h-full bg-blue transition-all duration-500"
+                            style={{ width: `${course.progress}%` }}
+                        ></div>
                     </div>
                 )}
             </div>
 
-            <div className="flex flex-col gap-5 cursor-pointer">
-                {/* <img 
-                    src={course.image} 
-                    alt={course.title}
-                    className="border-2 border-black rounded-t-4xl h-1/2 w-full object-cover"
-                /> */}
+            <div className="flex flex-col gap-5 cursor-pointer flex-grow">
                 <div className="flex flex-row justify-between">
-                    <h3 className="text-xl text-gray-500">{course.category}</h3>
+                    <h3 className="text-xl leading-tight line-clamp-2 text-gray-500">{course.category}</h3>
                 </div>
                 <div className="flex flex-col gap-2">
                     <h1 className="text-2xl text-heading">{course.title}</h1>
-                    <p className="text-xl text-gray-500">{course.description}</p>
+                    <p className="text-xl text-gray-500 leading-relaxed line-clamp-3">{course.description}</p>
                 </div>
             </div>
         </NavLink>

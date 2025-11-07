@@ -60,7 +60,9 @@ export const GetMyCourse = async () => {
         const data = await res.json();
         if(!res.ok) throw new Error(data.error || "Failed to fetch my courses");
 
-        return data.map((item) => ({
+        const courses = data.courses ?? []; 
+
+        return courses.map((item) => ({
             courseId: item.course_id,
             title: item.title,
             cover: item.cover?.startsWith("http")

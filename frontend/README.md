@@ -9,6 +9,7 @@ Terdapat beberapa tech stack yang digunakan dalam sisi FrontEnd Development, yai
 - React Icons (Icon libraries)
 - @mui/material (Material UI components)
 - React Hot Toast (Toast notification)
+- Lodash (Utility library)
 
 
 ## 📁 Project Structure

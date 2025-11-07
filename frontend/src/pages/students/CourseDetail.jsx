@@ -80,13 +80,13 @@ export default function CourseDetail() {
                         <TopBar onSearch={setSearchTerm} />
                         <div className="flex-1">
                             <div className="flex flex-col px-4 sm:px-6 lg:px-10 mb-5 gap-6">
-                                <div className="flex flex-col justify-between gap-8">
+                                <div className="flex flex-col justify-between gap-5">
                                     <h1 className="text-heading text-2xl sm:text-3xl lg:text-4xl font-semibold">{detailCourse.title}</h1>
-                                    <p className="text-gray-500 text-xl font-medium">{detailCourse.category}</p>
+                                    <p className="text-gray-500 text-xl font-medium mb-5">{detailCourse.category}</p>
 
                                     <video 
                                         ref={videoRef}
-                                        className="w-full rounded-2xl border-2 border-black"
+                                        className="w-full rounded-2xl border-3 border-black mb-8"
                                         src={detailCourse.videoUrl}
                                         controls
                                         onPlay={handleVideoPlay}
@@ -94,11 +94,11 @@ export default function CourseDetail() {
                                         onEnded={handleVideoPause}
                                     />
                                     <div className="flex flex-col gap-5">
-                                        <h1 className="text-heading text-2xl sm:text-3xl lg:text-4xl font-semibold">Overview</h1>
-                                        <p className="text-gray-500 text-xl text-balance">{detailCourse.description}</p>
+                                        <h1 className="text-heading text-2xl sm:text-3xl lg:text-3xl font-semibold">Overview</h1>
+                                        <p className="text-gray-500 text-xl text-balance mb-8">{detailCourse.description}</p>
                                     </div>
-                                    <div className="flex flex-col gap-5">
-                                        <h1 className="text-heading text-xl sm:text-2xl lg:text-3xl font-semibold">20 Comments</h1>
+                                    <div className="flex flex-col gap-6">
+                                        <h1 className="text-heading text-xl sm:text-2xl lg:text-2xl font-semibold">20 Comments</h1>
                                         <CourseComment />
                                     </div>
                                 </div>

@@ -5,14 +5,24 @@ export default function CourseCard({ course }) {
     const [duration, setDuration] = useState(null);
 
     useEffect(() => {
-        if(course.videoUrl) {
+        if (course.videoUrl) {
             const video = document.createElement("video");
+            video.preload = "metadata";
             video.src = course.videoUrl;
-            video.addEventListener("loadedmetadata", () => {
+
+            const handleLoaded = () => {
                 const minutes = Math.floor(video.duration / 60);
                 const seconds = Math.floor(video.duration % 60);
                 setDuration(`${minutes}:${seconds < 10 ? "0" : ""}${seconds}`);
-            });
+            };
+
+            video.addEventListener("loadedmetadata", handleLoaded);
+
+            if (video.readyState >= 1) {
+                handleLoaded();
+            }
+
+            return () => video.removeEventListener("loadedmetadata", handleLoaded);
         }
     }, [course.videoUrl]);
 
@@ -28,7 +38,7 @@ export default function CourseCard({ course }) {
                     className="h-64 w-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 {(course.duration || duration)&& (
-                    <span className="absolute bottom-3 right-2 z-20 backdrop-blur-xl bg-black/30 text-white text-base font-semibold px-2 py-0.5 rounded-lg">
+                    <span className="absolute bottom-5 right-3 z-30 backdrop-blur-xl bg-black/30 text-white text-base font-semibold px-2 py-0.5 rounded-lg tracking-wide">
                         {course.duration || duration}
                     </span>
                 )}

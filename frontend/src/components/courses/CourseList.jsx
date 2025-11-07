@@ -8,6 +8,7 @@ export default function CourseList({ selectedCategory = "All", searchTerm = "" }
     const { data: courses, error: courseError } = useCourse();
     const { myCourses, error: userCourseError } = useUserCourse();
 
+    console.log("Search term:", searchTerm);
     if (courseError || userCourseError) {
         return <p className="text-center text-xl text-red-500">Failed to load courses</p>;
     }

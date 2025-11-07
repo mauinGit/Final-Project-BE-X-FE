@@ -5,6 +5,7 @@ import { GoBook } from "react-icons/go";
 import { BsCollection } from "react-icons/bs";
 import { IoLogOutOutline } from "react-icons/io5";
 import { HiMenuAlt3 } from "react-icons/hi";
+import { GrHomeRounded } from "react-icons/gr";
 import useAuth from "../../hooks/useAuth";
 
 export default function SideBarStudent() {
@@ -18,11 +19,39 @@ export default function SideBarStudent() {
         navigate("/login");
     };
 
-    const navItems = [
+    const publicPages = [
+        { name: "Home", path: "/", icon: <GrHomeRounded size={24} style={{ strokeWidth: 1 }} /> },
+    ];
+
+    const studentPages  = [
         { name: "Dashboard", path: "/student/dashboard", icon: <RxDashboard size={24} /> },
         { name: "Courses", path: "/student/courseStudent", icon: <GoBook size={24} /> },
         { name: "My Courses", path: "/student/myCourses", icon: <BsCollection size={24} /> },
     ];
+
+    const renderNavSection = (title, items) => (
+        <div className="flex flex-col gap-2">
+        {open && <h4 className="text-gray-400 text-base font-medium px-2">{title}</h4>}
+        <ul className="flex flex-col gap-2">
+            {items.map((item, idx) => (
+            <li key={idx}>
+                <NavLink
+                to={item.path}
+                onClick={() => setMobileOpen(false)}
+                className={({ isActive }) =>
+                    `flex items-center gap-4 text-xl transition-all duration-200 ${
+                    isActive ? "text-blue" : "text-gray-500 hover:text-blue hover:font-medium"
+                    } ${open ? "px-2 py-2" : "justify-center p-2"}`
+                }
+                >
+                {item.icon}
+                {open && <span>{item.name}</span>}
+                </NavLink>
+            </li>
+            ))}
+        </ul>
+        </div>
+    );
 
     return(
         <>
@@ -50,38 +79,19 @@ export default function SideBarStudent() {
                     ${mobileOpen ? "pt-16" : "pt-14 lg:pt-0"}
                     ${mobileOpen ? "translate-x-0 w-full" : "-translate-x-full lg:translate-x-0"}
                     fixed top-0 left-0 lg:static pt-14 lg:pt-0 flex flex-col bg-white h-screen z-40 min-h-screen justify-between ease-in-out transition-all duration-300`}>
-                <div className="flex flex-col px-2 pt-4 gap-10 overflow-y-auto">
+                <div className="flex flex-col px-2 pt-4 gap-6 overflow-y-auto">
                     <div className="hidden lg:flex gap-4 items-center cursor-pointer" onClick={() => setOpen(!open)}>
-                        <img 
-                            src="/assets/logo/logoGDC.svg" 
-                            alt="Logo GDCourse" 
-                            className="w-15 h-12 sm:w-16 sm:h-14 transition-transform duration-300 hover:scale-110"
+                        <img
+                        src="/assets/logo/logoGDC.svg"
+                        alt="Logo GDCourse"
+                        className="w-15 h-12 sm:w-16 sm:h-14 transition-transform duration-300 hover:scale-110"
                         />
-                        <h1 className={`text-heading text-3xl font-bold transition-all duration-300 ${!open && "hidden"}`}>GDCourse</h1>
+                        <h1 className={`text-heading text-3xl font-bold transition-all duration-300 ${!open && "hidden"}`}>
+                        GDCourse
+                        </h1>
                     </div>
-                    <ul className={`flex flex-col transition-all duration-300 
-                            ${open ? "items-start" : "items-center"}
-                            ${mobileOpen ? "px-2" : "px:0"}`}>
-                        {navItems.map((item, index) => (
-                            <li key={index} className="list-none block h-12 mb-2 relative">
-                            <NavLink
-                                to={item.path}
-                                onClick={() => setMobileOpen(false)}
-                                className={({ isActive }) =>
-                                `flex items-center w-full gap-4 text-xl transition-all duration-200
-                                ${isActive
-                                    ? "text-blue"
-                                    : "text-gray-500 hover:text-blue hover:font-medium"
-                                } 
-                                ${open ? "px-1 py-2" : "p-2 justify-center"}`
-                                }
-                            >
-                                {item.icon}
-                                {open && <span>{item.name}</span>}
-                            </NavLink>
-                            </li>
-                        ))}
-                    </ul>
+                    {renderNavSection("Public", publicPages)}
+                    {renderNavSection("Students", studentPages)}
                 </div>
                 <button 
                     onClick={handleLogout}

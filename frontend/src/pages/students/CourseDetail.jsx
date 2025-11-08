@@ -98,7 +98,7 @@ export default function CourseDetail() {
                                         <p className="text-gray-500 text-xl text-balance mb-8">{detailCourse.description}</p>
                                     </div>
                                     <div className="flex flex-col gap-6">
-                                        <h1 className="text-heading text-xl sm:text-2xl lg:text-2xl font-semibold">20 Comments</h1>
+                                        <h1 className="text-heading text-xl sm:text-2xl lg:text-2xl font-semibold">Comments</h1>
                                         <CourseComment />
                                     </div>
                                 </div>

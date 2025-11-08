@@ -1,0 +1,9 @@
+# Environment variables
+.env
+
+# Ignore video files
+*.mp4
+*.mov
+*.avi
+*.mkv
+backend/assets/videos/

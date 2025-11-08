@@ -22,61 +22,6 @@ export default function CourseComment() {
     const [replyText, setReplyText] = useState("");
     const [editingId, setEditingId] = useState(null);
     const [editText, setEditText] = useState("");
-    // const [comments, setComments] = useState([
-    //     {
-    //         id: 1,
-    //         name: "Kevin",
-    //         avatar: "https://randomuser.me/api/portraits/men/1.jpg",
-    //         text: "Hey, guys I’m having trouble understanding how to add assets in Figma. Any tips?",
-    //         likes: 10,
-    //         replies: [
-    //             {
-    //             id: 11,
-    //             name: "Emily",
-    //             text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-    //             likes: 2,
-    //             },
-    //             {
-    //             id: 12,
-    //             name: "Richard",
-    //             text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-    //             likes: 0,
-    //             },
-    //         ],
-    //     },
-    //     {
-    //         id: 2,
-    //         name: "Rosie",
-    //         avatar: "https://randomuser.me/api/portraits/women/2.jpg",
-    //         text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-    //         likes: 5,
-    //         replies: [],
-    //     },
-    // ]);
-
-    // const handleAddComment = (e) => {
-    //     // if(!newComment.trim()) return;
-    //     // const newCmt = {
-    //     //     id: Date.now(),
-    //     //     name: "You",
-    //     //     avatar: "https://randomuser.me/api/portraits/women/3.jpg",
-    //     //     text: newComment,
-    //     //     likes: 0,
-    //     //     replies: [],
-    //     // };
-    //     // setComments([newCmt, ...comments]);
-    //     // setNewComment("");
-    //     e.preventDefault();
-    //     if(!newComment.trim()) return;
-
-    //     try {
-    //         await addComment(newComment);
-    //         setNewComment("");
-    //         toast.success("Comment added!");
-    //     } catch (error) {
-    //         toast.error("Failed to add comment");
-    //     }
-    // };
 
     const handleAddComment = async (e) => {
         e.preventDefault();

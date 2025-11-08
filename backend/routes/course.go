@@ -12,6 +12,7 @@ func routesCourse(api fiber.Router) {
 
 	course.Get("/", controllers.GetCourse)
 	course.Get("/:id", controllers.GetCourseByID)
+	course.Get("/:id/comments", controllers.GetCommentsByCourse)
 
 	course.Use(middleware.AdminOnly())
 	course.Post("/", controllers.CreateCourse)

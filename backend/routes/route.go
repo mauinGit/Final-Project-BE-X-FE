@@ -9,4 +9,5 @@ func MainRoutes(app *fiber.App) {
 	routesUser(api)
 	routesContact(api)
 	routesUserCourse(api)
+	routesCommentar(api)
 }

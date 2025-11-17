@@ -7,6 +7,13 @@ Pada Platform ini juga terbagi menjadi 2 Role yaitu:
 2. Student (Publik) = melihat course.
 
 ## Fitur Utama GDCourse
+* Manajemen Pengguna & Autentikasi: Fitur registrasi dan login pengguna dengan peran admin atau siswa. Autentikasi menggunakan JSON Web Token (JWT) sehingga setiap permintaan ke endpoint terlindung membutuhkan token yang valid. Termasuk pula fitur logout, refresh token untuk memperbarui JWT, serta reset password menggunakan token yang dikirim melalui email.
+
+* CRUD Kursus oleh Admin: Admin dapat membuat kursus baru, melihat daftar kursus, mengedit informasi kursus, dan menghapus kursus. Setiap kursus memiliki judul, deskripsi, konten (video), serta kategori. Admin juga dapat mengelola kategori kursus (menambah, mengubah, menghapus kategori) untuk mengorganisir kursus.
+
+* Akses Kursus oleh Siswa: Siswa (user terdaftar dengan role student) dapat melihat daftar kursus yang tersedia, melihat detail kursus, dan menonton video pembelajaran. Aplikasi juga mencatat progres belajar siswa pada suatu kursus. Siswa dapat memberikan komentar pada kursus dan berinteraksi dengan komentar (reply dan like) sebagai bagian dari forum diskusi setiap kursus.
+
+* Dokumentasi API: Tersedia dokumentasi API endpoint dalam bentuk koleksi Postman sehingga pengembang dapat dengan mudah menguji setiap endpoint. (Silakan lihat dokumentasi Postman untuk detail penggunaan API).
 
 ## Teknologi yang Digunakan
 * **Bahasa:** Golang
